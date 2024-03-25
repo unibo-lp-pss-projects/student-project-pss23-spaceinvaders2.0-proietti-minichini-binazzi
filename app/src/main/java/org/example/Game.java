@@ -172,7 +172,7 @@ public class Game extends Canvas {
      */
     public void initBoss() {
         // create the boss ship and place it at the top of the screen
-        boss = new BossEntity(this, "sprites/enemy_2.gif", 370, 50);
+        boss = new BossEntity(this, "sprites/boss.gif", 370, 50);
         entities.add(boss);
     }
 
