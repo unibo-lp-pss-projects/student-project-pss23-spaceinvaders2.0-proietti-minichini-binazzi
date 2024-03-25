@@ -126,6 +126,19 @@ public class MenuPage extends JFrame {
 
         // start button, it opens the game
         JButton start = new JButton("Start Game");
+        start.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                // start the game
+                Game game = new Game();
+                game.startGame();
+                // start the game loop
+                new Thread(() -> {
+                    game.gameLoop();
+                }).start();
+            }
+        });
         
         start.setAlignmentX(Component.CENTER_ALIGNMENT);
         start.setBorder(BorderFactory.createRaisedBevelBorder());
