@@ -31,9 +31,7 @@ public class Game extends Canvas {
     public int alienCount;
     public BossEntity boss;
 
-    public String Startmessage = "Press any key to start";
-    public String Deathmessage = "Oh no! Ti hanno preso!";
-    public String Winmessage = "Bravo! hai vinto";
+    public String message = "Press any key to start";
     public boolean waitingForKeyPress = true;
     public boolean leftPressed = false;
     public boolean rightPressed = false;
@@ -44,15 +42,17 @@ public class Game extends Canvas {
 
     public boolean notificationShowing = false;
     public JFrame notificationFrame;
-    public void showNotificationPanel(String message) {
+    public void showNotificationPanel(Sprite imageSprite) {
         if (!notificationShowing) {
             JPanel notificationPanel = new JPanel();
             notificationPanel.setLayout(new BorderLayout());
     
-            JLabel messageLabel = new JLabel(message);
-            messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            messageLabel.setFont(new Font("Arial", Font.BOLD, 16));
-            notificationPanel.add(messageLabel, BorderLayout.CENTER);
+            ImageIcon imageIcon = new ImageIcon(imageSprite.image);
+            Image image = imageIcon.getImage();
+            Image scaledImage = image.getScaledInstance(300, 150, Image.SCALE_SMOOTH); // Imposta le dimensioni desiderate per l'immagine
+            ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
+            JLabel imageLabel = new JLabel(scaledImageIcon);
+            notificationPanel.add(imageLabel, BorderLayout.CENTER);
     
             JButton closeButton = new JButton("Chiudi il gioco");
             closeButton.addActionListener(new ActionListener() {
@@ -64,16 +64,16 @@ public class Game extends Canvas {
     
             notificationFrame = new JFrame("Notifica");
             notificationFrame.getContentPane().add(notificationPanel);
-            notificationFrame.setSize(300, 150);
+            notificationFrame.pack(); // Dimensiona la finestra in base ai componenti al suo interno
             notificationFrame.setLocationRelativeTo(null);
             notificationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             notificationFrame.setVisible(true);
-            
+    
             // Imposta il flag per indicare che la finestra di notifica è aperta
             notificationShowing = true;
         }
-    }
-
+    } 
+    
     /**
      * Construct our game and set it running.
      */
@@ -200,17 +200,19 @@ public class Game extends Canvas {
      */
     public void notifyDeath() {
         waitingForKeyPress = true;
-        Startmessage = "";
-        showNotificationPanel(Deathmessage);
-    }
+        message = "";
+        Sprite loseSprite = SpriteStore.get().getSprite("sprites/lose.jpg");
+        showNotificationPanel(loseSprite);
+    }    
     
     /**
      * Notification that the player has won since all the aliens are dead.
      */
     public void notifyWin() {
         waitingForKeyPress = true;
-        Startmessage = "";
-        showNotificationPanel(Winmessage);
+        message = "";
+        Sprite winSprite = SpriteStore.get().getSprite("sprites/win.jpg");
+        showNotificationPanel(winSprite);
     }
     
     public void closeNotificationPanel() {
@@ -342,8 +344,8 @@ public class Game extends Canvas {
             // message
             if (waitingForKeyPress) {
                 g.setColor(Color.white);
-                g.drawString(Startmessage,
-                    (800 - g.getFontMetrics().stringWidth(Startmessage)) / 2,
+                g.drawString(message,
+                    (800 - g.getFontMetrics().stringWidth(message)) / 2,
                     250);
             }
 
