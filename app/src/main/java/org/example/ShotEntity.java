@@ -4,18 +4,18 @@ package org.example;
  * An entity representing a shot fired by the player's ship
  */
 public class ShotEntity extends Entity {
-    // The vertical speed at which the players shot moves
+    // The player's shot vertical speed
     public double moveSpeed = -300;
     // The game in which this entity exists
     public Game game;
-    // True if this shot has been "used", i.e. its hit something
+    // True if this shot has been "used", for example if it hit something
     public boolean used = false;
 
     /**
      * Create a new shot from the player
      *
      * @param game   The game in which the shot has been created
-     * @param sprite The sprite representing this shot
+     * @param sprite The sprite (image) representing this shot.
      * @param x      The initial x location of the shot
      * @param y      The initial y location of the shot
      */
@@ -53,7 +53,7 @@ public class ShotEntity extends Entity {
             return;
         }
 
-        // if we've hit an alien, kill it!
+        // if we've hit an alien, kill it.
         if (other instanceof AlienEntity) {
             // remove the affected entities
             game.removeEntity(this);
