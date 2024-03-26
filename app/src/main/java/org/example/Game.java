@@ -8,30 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The main hook of our game. This class with both act as a manager for the
- * display and central mediator for the game logic.
- * Display management will consist of a loop that cycles round all entities
- * in the game asking them to move and then drawing them in the appropriate
- * place. With the help of an inner class it will also allow the player to
- * control the main ship.
+ * The main part of the game. This class will serve as the game logic's central mediator in addition to managing the display.
+ * Display management will consist of a loop that cycles round each entity asking them to move and then drawing them in the right place.
+ * With the assistance of an inner class it will also allow the player to control the ship.
  */
+
 public class Game extends Canvas {
-    public BufferStrategy strategy;  // The strategy that allows us to use accelerate page flipping
+    public BufferStrategy strategy;  // The strategy that enables the use of rapid page flipping
     public boolean gameRunning = true;
 
     public List<Entity> entities = new ArrayList<Entity>();
     public List<Entity> removeList = new ArrayList<Entity>();
 
-    public Entity ship;  // The entity representing the player
+    public Entity ship;  // The entity representing the player (the ship)
     public double moveSpeed = 300;
 
     public long lastFire = 0;  // The time at which last fired a shot
     public long firingInterval = 50;
 
     public int alienCount;
-    public BossEntity boss;
+    public BossEntity boss; // The entity representing the boss
 
-    public String message = "Press any key to start";
+    public String message = "Press any key to start"; // This string will be displayed once the game page is open 
     public boolean waitingForKeyPress = true;
     public boolean leftPressed = false;
     public boolean rightPressed = false;
@@ -42,6 +40,7 @@ public class Game extends Canvas {
 
     public boolean notificationShowing = false;
     public JFrame notificationFrame;
+
     public void showNotificationPanel(Sprite imageSprite) {
         if (!notificationShowing) {
             JPanel notificationPanel = new JPanel();
@@ -49,52 +48,53 @@ public class Game extends Canvas {
     
             ImageIcon imageIcon = new ImageIcon(imageSprite.image);
             Image image = imageIcon.getImage();
-            Image scaledImage = image.getScaledInstance(300, 150, Image.SCALE_SMOOTH); // Imposta le dimensioni desiderate per l'immagine
+            Image scaledImage = image.getScaledInstance(300, 150, Image.SCALE_SMOOTH); // Set the desired image size
             ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
             JLabel imageLabel = new JLabel(scaledImageIcon);
             notificationPanel.add(imageLabel, BorderLayout.CENTER);
     
-            JButton closeButton = new JButton("Chiudi il gioco");
+            JButton closeButton = new JButton("Close the game");
             closeButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    System.exit(0); // Chiude l'applicazione
+                    System.exit(0); // closes the application
                 }
             });
             notificationPanel.add(closeButton, BorderLayout.SOUTH);
     
-            notificationFrame = new JFrame("Notifica");
+            notificationFrame = new JFrame("Notification");
             notificationFrame.getContentPane().add(notificationPanel);
-            notificationFrame.pack(); // Dimensiona la finestra in base ai componenti al suo interno
+            notificationFrame.pack(); // Size the window according to the elements inside
             notificationFrame.setLocationRelativeTo(null);
             notificationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             notificationFrame.setVisible(true);
     
-            // Imposta il flag per indicare che la finestra di notifica è aperta
+            // Set the flag to show that the notification window is open
             notificationShowing = true;
         }
     } 
     
     /**
-     * Construct our game and set it running.
+     * Construct the game and set it running.
      */
+
     public Game() {
-        // create a frame to contain our game
+        // create a frame to contain the game
         JFrame container = new JFrame("Space Invaders");
 
-        // At the moment of the game's creation, we initialize the sounds.
+        // at the moment of the game's creation, we initialize the background music (from a sound folder).
         AudioClip backgroundMusic = audioStore.getAudio("sound/background.wav");
-        backgroundMusic.loop();
+        backgroundMusic.loop(); // the music keeps playing (loop)
 
-        // get hold the content of the frame and set up the resolution of the game
+        // obtain the content of the frame and set up the game's resolution
         JPanel panel = (JPanel) container.getContentPane();
         panel.setPreferredSize(new Dimension(800, 600));
         panel.setLayout(null);
 
-        // set up our canvas size and put it into the content of the frame
+        // set up the canvas size and put it into the content of the frame
         setBounds(0, 0, 800, 600);
         panel.add(this);
 
-        // Tell AWT not to repaint since we do that our self in accelerated mode
+        // tell AWT not to repaint since we do that in accelerated mode
         setIgnoreRepaint(true);
 
         container.pack();
@@ -108,8 +108,7 @@ public class Game extends Canvas {
             }
         });
 
-        // add a key input system (defined below) to our canvas, so we can
-        // respond to key pressed
+        // add a key input system (defined below) to the canvas, so we can respond to key pressed
         KeyInputHandler keyInputHandler = new KeyInputHandler();
 
         this.addKeyListener(keyInputHandler);
@@ -120,13 +119,11 @@ public class Game extends Canvas {
         // request the focus so key events come to us
         requestFocus();
 
-        // create the buffering strategy which will allow AWT to manage our
-        // accelerated graphics
+        // create the buffering strategy which will allow AWT to manage our accelerated graphics
         createBufferStrategy(2);
         strategy = getBufferStrategy();
 
-        // initialise the entities in our game so there's something to see
-        // at startup
+        // initialise the entities in the game so the player can see something at startup
         initEntities();
     }
 

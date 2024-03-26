@@ -1,5 +1,11 @@
 package org.example;
 
+/*
+ * This class contains the creation of the BossEntity, the entity that appears when all the aliens are killed.
+ * The Boss can move from one side of the screen to another without being able to move down the screen.
+ * It can shoot like the ShipEntity, so the player must avoid being hit while trying to eliminate the Boss.
+ */
+
 import java.awt.Graphics2D;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,9 +15,9 @@ import java.util.TimerTask;
 
 public class BossEntity extends Entity {
 
-    private static final double SPEED = 150;
-    private static final int BOSS_WIDTH = 64;
-    private static final int BOSS_HEIGHT = 64;
+    private static final double SPEED = 150; // A private static variable holding the boss's movement speed.
+    private static final int BOSS_WIDTH = 64; // A private static variable holding the boss's width
+    private static final int BOSS_HEIGHT = 64; // A private static variable holding the boss's height
 
     //private int health;
 
@@ -47,7 +53,7 @@ public class BossEntity extends Entity {
         // Create a new shot fired by the boss
         int shotX = (int) (x + (BOSS_WIDTH / 2)); // X position of the shot (center of the boss)
         int shotY = (int) (y + BOSS_HEIGHT); // Y position of the shot (bottom of the boss)
-        shot = new ShotEntity(game, "sprites/bullet.png", shotX, shotY);
+        shot = new ShotEntity(game, "sprites/bullet.png", shotX, shotY); // Assign a sprite (image) to this shot
         shot.dy = -shot.moveSpeed; // Set the shot's vertical speed to move upwards
         game.entities.add(shot);
     }
@@ -56,12 +62,12 @@ public class BossEntity extends Entity {
 
     //@Override
     public void draw(Graphics2D g) {
-        super.draw(g); // Draw boss sprite
+        super.draw(g); // Draw the sprite of the boss
     }
 
     @Override
     public void collidedWith(Entity other) {
-        // Collision logic with other entities can be implemented here
+        // Collision logic with other entities
         if (other instanceof ShotEntity) {
             game.notifyWin();
         }
@@ -69,6 +75,6 @@ public class BossEntity extends Entity {
 
     @Override
     public void doLogic() {
-        // Boss logic can be implemented here
+
     }
 }

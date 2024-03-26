@@ -10,10 +10,11 @@ public class AlienEntity extends Entity {
      * Create a new alien entity
      *
      * @param game The game in which this entity is being created
-     * @param ref  The sprite which should be displayed for this alien
-     * @param x    The initial x location of this alien
-     * @param y    The initial y location of this alien
+     * @param ref  The sprite (image) which should be displayed for this alien
+     * @param x    The initial x location of the alien
+     * @param y    The initial y location of the alien
      */
+
     public AlienEntity(Game game, String ref, int x, int y) {
         super(ref, x, y);
         
@@ -22,18 +23,19 @@ public class AlienEntity extends Entity {
     }
 
     /**
-     * Request that this alien moved based on time elapsed
+     * Move this alien according to the amount of time that has passed
      *
-     * @param delta The time that has elapsed since last move
+     * @param delta The time that has passed since last move
      */
+
     public void move(long delta) {
-        // if we have reached the left hand side of the screen and
-        // are moving left then request a logic update
+        // Request a logic update if we have reached the left hand side of the screen and
+        // are moving left
         if ((dx < 0) && (x < 10)) {
             game.updateLogic();
         }
-        // and vice vesa, if we have reached the right hand side of
-        // the screen and are moving right, request a logic update
+        // Request a logic update if we have reached the right hand side of
+        // the screen and are moving right
         if ((dx > 0) && (x > 750)) {
             game.updateLogic();
         }
@@ -46,12 +48,13 @@ public class AlienEntity extends Entity {
     /**
      * Update the game logic related to aliens
      */
+
     public void doLogic() {
-        // swap over horizontal movement and move down the screen a bit
+        // change the movement from horizontal to slightly down the screen
         dx = -dx;
         y += 10;
 
-        // if we've reached the bottom of the screen then the player dies
+        // if we have reached the bottom of the screen then the player dies
         if (y > 570) {
             game.notifyDeath();
         }
@@ -62,6 +65,7 @@ public class AlienEntity extends Entity {
      *
      * @param other The other entity
      */
+    
     public void collidedWith(Entity other) {
         
     }
