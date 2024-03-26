@@ -128,9 +128,9 @@ public class Game extends Canvas {
     }
 
     /**
-     * Start a fresh game, this should clear out any old data and
-     * create a new set.
+     * Start a fresh game, this should clear out any old data and create a new set.
      */
+
     public void startGame() {
 
         // clear out any existing entities and initialise a new set
@@ -147,8 +147,9 @@ public class Game extends Canvas {
      * Initialise the starting state of the entities (ship and aliens). Each
      * entity will be added to the overall list of entities in the game.
      */
+
     public void initEntities() {
-        // create the player ship and place it roughly in the center of the screen
+        // create the player ship and place it in the center of the screen
         ship = new ShipEntity(this, "sprites/ship.gif", 370, 550);
         entities.add(ship);
 
@@ -167,8 +168,9 @@ public class Game extends Canvas {
     /**
      * Initialise the boss entity.
      */
+
     public void initBoss() {
-        // create the boss ship and place it at the top of the screen
+        // create the boss entity and place it at the top of the screen
         boss = new BossEntity(this, "sprites/boss.gif", 370, 50);
         entities.add(boss);
     }
@@ -203,7 +205,7 @@ public class Game extends Canvas {
     }    
     
     /**
-     * Notification that the player has won since all the aliens are dead.
+     * Notification that the player has won since all the aliens and the boss have died.
      */
     public void notifyWin() {
         waitingForKeyPress = true;
@@ -223,7 +225,7 @@ public class Game extends Canvas {
      * Notification that an alien has been killed
      */
     public void notifyAlienKilled() {
-        // reduce the alien count, if there are none left, the player has won!
+        // reduce the alien count, if there are none left, the player has won the first level
         alienCount--;
 
         if (alienCount == 0 && boss == null) {
@@ -231,8 +233,7 @@ public class Game extends Canvas {
             boss.fire();
         }
 
-        // if there are still some aliens left then they all need to get faster, so
-        // speed up all the existing aliens
+        // if there are still some aliens left then they all need to get faster. 
         for (Entity entity : entities) {
             if (entity instanceof AlienEntity) {
                 // speed up by 2%
@@ -243,8 +244,7 @@ public class Game extends Canvas {
 
     /**
      * Attempt to fire a shot from the player. Its called "try"
-     * since we must first check that the player can fire at this
-     * point, i.e. has he/she waited long enough between shots
+     * since we must first check that the player can fire. In order to fire, the player has to wait long enough between shots.
      */
     public void tryToFire() {
         // check that we have waiting long enough to fire
@@ -252,7 +252,7 @@ public class Game extends Canvas {
             return;
         }
 
-        // if we waited long enough, create the shot entity, and record the time.
+        // if the player waited long enough, create the shot entity, and record the time.
         lastFire = System.currentTimeMillis();
         ShotEntity shot = new ShotEntity(this, "sprites/shot.gif",
             ship.getX() + 10, ship.getY() - 30);
@@ -260,8 +260,7 @@ public class Game extends Canvas {
     }
 
     /**
-     * The main game loop. This loop is running during all game
-     * play as is responsible for the following activities:
+     * The main game loop. This loop is running during all game play as it is responsible for the following activities:
      * <p/>
      * - Working out the speed of the game loop to update moves
      * - Moving the game entities
@@ -273,15 +272,14 @@ public class Game extends Canvas {
     public void gameLoop() {
         long lastLoopTime = System.currentTimeMillis();
 
-        // keep looping round til the game ends
+        // keep looping round until the game ends
         while (gameRunning) {
-            // work out how long it has been since the last update, this will be
-            // used to calculate how far the entities should move this loop
+            // work out how long it has been since the last update.
+            // This will be used to calculate how far the entities should move this loop
             long delta = System.currentTimeMillis() - lastLoopTime;
             lastLoopTime = System.currentTimeMillis();
 
-            // Get hold of a graphics context for the accelerated
-            // surface and blank it out
+            // Get hold of a graphics context for the accelerated surface and blank it out
             Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
             g.setColor(Color.black);
             g.fillRect(0, 0, 800, 600);
@@ -298,9 +296,8 @@ public class Game extends Canvas {
                 entity.draw(g);
             }
 
-            // brute force collisions, compare every entity against every
-            // other entity. If any of them collide notify both entities that
-            // the collision has occurred
+            // brute force collisions, compare every entity against every other entity.
+            // If any of them collide notify both entities that the collision has occurred
             for (int p = 0; p < entities.size(); p++) {
                 for (int s = p + 1; s < entities.size(); s++) {
                     Entity me = entities.get(p);
@@ -337,8 +334,7 @@ public class Game extends Canvas {
                 logicRequiredThisLoop = false;
             }
 
-            // if we're waiting for an "any key" press then draw the current
-            // message
+            // if we're waiting for an "any key" press then draw the current message
             if (waitingForKeyPress) {
                 g.setColor(Color.white);
                 g.drawString(message,
