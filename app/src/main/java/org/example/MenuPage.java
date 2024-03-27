@@ -13,17 +13,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.imageio.ImageIO;
-//import javax.sound.sampled.*;
-// import java.awt.event.WindowAdapter;
-// import java.awt.event.WindowEvent;
-// import java.awt.event.WindowListener;
 
 
 public class MenuPage extends JFrame {
     private JLabel contentLabel;
-    //public AudioStore audioStore = AudioStore.get();
-    // private AudioStore audioStore;
-    // private AudioClip backgroundMusic;
+    public AudioStore audioStore = AudioStore.get();
+    public AudioClip menuMusic;
     
     public MenuPage() {
         setTitle("Menu Page");
@@ -31,12 +26,14 @@ public class MenuPage extends JFrame {
         setSize(800, 600);
         setLocationRelativeTo(null);
 
-        // set a background image 
+        // set a background image and sound
         JPanel backgroundPanel = new JPanel(){
             private Image backgroundImage;
             {
             try{
-                backgroundImage = ImageIO.read(getClass().getResourceAsStream("/sprites/bgimage.png")); // loads the image to set as a background
+                backgroundImage = ImageIO.read(getClass().getResourceAsStream("/sprites/bgimage.png")); // loads the image and sound to set as a background
+                menuMusic = audioStore.getAudio("sound/menuMusic.wav");
+                menuMusic.loop();
             } catch (Exception e){
                 e.printStackTrace();
             }
@@ -55,20 +52,6 @@ public class MenuPage extends JFrame {
         backgroundPanel.setLayout(new BorderLayout());
         backgroundPanel.setPreferredSize(new Dimension(800,600)); // set the same size of the JFrame
 
-        // Load the audio store
-        // audioStore = AudioStore.get();
-
-        // // Get the background music audio clip
-        // backgroundMusic = audioStore.getAudio("");
-        // backgroundMusic.loop();
-
-        // // Add a window listener to stop the audio when the window is closed
-        // addWindowListener(new WindowAdapter() {
-        //     @Override
-        //     public void windowClosing(WindowEvent e) {
-        //         stopBackgroundMusic();
-        //     }
-        // });
 
         // create a panel containing the buttons
         JPanel buttonPanel = new JPanel();
@@ -131,6 +114,7 @@ public class MenuPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 // start the game
+                menuMusic.stop();
                 Game game = new Game();
                 game.startGame();
                 // start the game loop
@@ -176,11 +160,6 @@ public class MenuPage extends JFrame {
         setVisible(true);
     }
 
-    // private void stopBackgroundMusic() {
-    //     if (backgroundMusic != null) {
-    //         backgroundMusic.close();
-    //     }
-    // }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
