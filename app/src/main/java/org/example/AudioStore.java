@@ -1,5 +1,12 @@
 package org.example;
 
+/*
+ * This class represents an Audio Store, providing functionality for managing and retrieving audio clips.
+ * It contains methods to fetch audio clips based on references, either from memory or by loading them from external resources when needed.
+ * Throughout the game, the Audio Store keeps track of audio clips and makes sure they are easily accessible.
+ * Additionally, it has the ability to handle errors and terminate the program if necessary.
+ */
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;

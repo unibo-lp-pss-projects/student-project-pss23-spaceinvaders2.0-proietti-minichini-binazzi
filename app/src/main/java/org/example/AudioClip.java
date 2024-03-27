@@ -1,7 +1,7 @@
 package org.example;
 
-/**
- * This AudioClip class represents an audio clip and provides methods for playback control.
+/*
+ * The AudioClip class represents an audio clip and provides methods for playback control.
  * It utilizes the Java Sound API's Clip class for audio playback.
  * This class allows for starting, stopping, looping, and retrieving the audio clip.
  */

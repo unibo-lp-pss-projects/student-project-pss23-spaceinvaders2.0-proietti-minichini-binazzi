@@ -2,7 +2,7 @@ package org.example;
 
 import java.awt.*;
 
-/**
+/*
  * An entity represents any element that appears in the game. 
  * The entity is responsible for resolving collisions and movement based on a set of properties defined either by subclass or externally.
  */
@@ -50,7 +50,7 @@ public abstract class Entity {
         sprite.draw(g, (int) x, (int) y);
     }
 
-    /**
+    /*
      * Do the logic associated with this entity. This method
      * will be called periodically based on game events
      */
@@ -58,7 +58,7 @@ public abstract class Entity {
         
     }
 
-    /**
+    /*
      * Get the x location of this entity
      */
     public int getX() {
@@ -69,7 +69,7 @@ public abstract class Entity {
         return (int) y;
     }
 
-    /**
+    /*
      * Check if this entity collided with another.
      * @return True if the entities collide with each other
      */

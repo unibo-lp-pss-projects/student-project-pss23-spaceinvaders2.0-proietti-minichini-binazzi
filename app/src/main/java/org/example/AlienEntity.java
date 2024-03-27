@@ -1,12 +1,16 @@
 package org.example;
 
-public class AlienEntity extends Entity {
+/*
+ * This class represents the alien entity in the game.
+ * Aliens have movement speed and can move horizontally and vertically across the screen.
+ * They are shown as a mass, a block, and are represented by a sprite (image).
+ */
+
+public class AlienEntity extends Entity { // AlienEntity inherits all the properties and methods of the Entity class.
     public double moveSpeed = 75; // A public double variable holding the alien's movement speed.
-    public Game game; // A public Game object, likely referencing the game instance this alien belongs to
+    public Game game; // A public Game object, likely referencing the game instance aliens belong to
 
-
-
-    /**
+    /*
      * Create a new alien entity
      *
      * @param game The game in which this entity is being created
@@ -22,7 +26,7 @@ public class AlienEntity extends Entity {
         dx = -moveSpeed;
     }
 
-    /**
+    /*
      * Move this alien according to the amount of time that has passed
      *
      * @param delta The time that has passed since last move
@@ -45,7 +49,7 @@ public class AlienEntity extends Entity {
     }
 
 
-    /**
+    /*
      * Update the game logic related to aliens
      */
 
@@ -60,7 +64,7 @@ public class AlienEntity extends Entity {
         }
     }
 
-    /**
+    /*
      * Notification that this alien has collided with another entity
      *
      * @param other The other entity
