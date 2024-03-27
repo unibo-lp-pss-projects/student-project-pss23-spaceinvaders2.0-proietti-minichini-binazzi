@@ -37,6 +37,8 @@ public class Game extends Canvas {
     public boolean logicRequiredThisLoop = false;
 
     public AudioStore audioStore = AudioStore.get();
+    public AudioClip backgroundMusic;
+    public AudioClip laserSound;
 
     public boolean notificationShowing = false;
     public JFrame notificationFrame;
@@ -82,7 +84,7 @@ public class Game extends Canvas {
         JFrame container = new JFrame("Space Invaders");
 
         // at the moment of the game's creation, we initialize the background music (from a sound folder).
-        AudioClip backgroundMusic = audioStore.getAudio("sound/background.wav");
+        backgroundMusic = audioStore.getAudio("sound/background.wav");
         backgroundMusic.loop(); // the music keeps playing (loop)
 
         // obtain the content of the frame and set up the game's resolution
@@ -200,6 +202,7 @@ public class Game extends Canvas {
     public void notifyDeath() {
         waitingForKeyPress = true;
         message = "";
+        backgroundMusic.stop();
         Sprite loseSprite = SpriteStore.get().getSprite("sprites/lose.jpg");
         showNotificationPanel(loseSprite);
     }    
@@ -210,6 +213,7 @@ public class Game extends Canvas {
     public void notifyWin() {
         waitingForKeyPress = true;
         message = "";
+        backgroundMusic.stop();
         Sprite winSprite = SpriteStore.get().getSprite("sprites/win.jpg");
         showNotificationPanel(winSprite);
     }
@@ -411,7 +415,7 @@ public class Game extends Canvas {
             }
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 firePressed = true;
-                AudioClip laserSound = audioStore.getAudio("sound/shoot.wav");
+                laserSound = audioStore.getAudio("sound/shoot.wav");
                 laserSound.play();
             }
         }
