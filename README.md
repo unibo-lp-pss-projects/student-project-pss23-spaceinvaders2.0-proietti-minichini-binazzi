@@ -32,3 +32,73 @@ Space Invaders permetterà al giocatore di pilotare una navicella spaziale con l
 
 Oltre a queste entità principali, abbiamo anche identificato la classe “Game”, che funge da mediatore centrale per la logica di gioco e la gestione dell'interfaccia utente. Questa classe coordina il ciclo di gioco, il rendering grafico, la gestione degli input utente e il controllo degli eventi di gioco. Inoltre, è presente una funzionalità interna a Game detta “KeyInputHandler”, che consente al giocatore di avviare il gioco e muovere la navicella per poter raggiungere il suo obiettivo. 
 
+```mermaid
+classDiagram
+    Entity <|-- AlienEntity
+    Entity <|-- ShipEntity
+    Entity <|-- ShotEntity
+    Entity <|-- BossEntity
+    Game --> Entity
+    Entity --> Sprite
+
+    class Entity {
+    - x: double
+    - y: double
+    - sprite: Sprite
+    - dx: double
+    - dy: double
+    + move(delta: long): void
+    + draw(g: Graphics): void
+    + collidesWith(other: Entity): boolean
+    + collidedWith(other: Entity): void
+    }
+    class Sprite {
+        - image: Image
+        + Sprite(image: Image)
+        + getWidth(): int
+        + getHeight(): int
+        + draw(g: Graphics, x: int, y: int): void
+    }
+    class AlienEntity {
+        - moveSpeed: double
+        - game: Game
+        + AlienEntity(game: Game, ref: String, x: int, y: int)
+        + move(delta: long): void
+        + doLogic(): void
+        + collidedWith(other: Entity): void
+    }
+    class ShipEntity {
+        - game: Game
+        + ShipEntity(game: Game, ref: String, x: int, y: int)
+        + move(delta: long): void
+        + collidedWith(other: Entity): void
+    }
+    class ShotEntity {
+        - moveSpeed: double
+        - game: Game
+        - used: boolean
+        + ShotEntity(game: Game, sprite: String, x: int, y: int)
+        + move(delta: long): void
+        + collidedWith(other: Entity): void
+    }
+    class BossEntity {
+    + BossEntity(game: Game, sprite: String, x: int, y: int)
+    + move(delta: long): void
+    + fire(): void
+    + collidedWith(other: Entity): void
+    + draw(g: Graphics2D): void
+    }
+    class Game {
+        - BufferStrategy strategy
+        - List<Entity> entities
+        - Entity ship
+        - BossEntity boss
+        - boolean gameRunning
+        - boolean waitingForKeyPress
+        + Game()
+        + startGame()
+        + initEntities()
+        + initBoss()
+        + gameLoop()
+    }
+```

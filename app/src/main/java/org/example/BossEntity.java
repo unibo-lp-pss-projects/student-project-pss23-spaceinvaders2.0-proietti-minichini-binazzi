@@ -17,7 +17,7 @@ public class BossEntity extends Entity { // BossEntity inherits all the properti
     private static final int BOSS_HEIGHT = 64; // A private static variable holding the boss's height
 
     private Game game; // a private game referencing the game instance the boss belongs to.
-    private ShotEntity shot; // a private shot referencing the shot fired by the boss.
+    private ShotEntity shot; // a private shot referencing the shot fired by the boss (in this case).
     private Timer shotTimer; // a private shotTimer representing the timer used to control the boss's firing rate.
 
     /*
