@@ -7,7 +7,7 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/*
  * The main part of the game. This class will serve as the game logic's central mediator in addition to managing the display.
  * Display management will consist of a loop that cycles round each entity asking them to move and then drawing them in the right place.
  * With the assistance of an inner class it will also allow the player to control the ship.
@@ -23,7 +23,7 @@ public class Game extends Canvas {
     public Entity ship;  // The entity representing the player (the ship)
     public double moveSpeed = 300;
 
-    public long lastFire = 0;  // The time at which last fired a shot
+    public long lastFire = 0;  // The last time a shot was fired
     public long firingInterval = 50;
 
     public int alienCount;
@@ -43,6 +43,11 @@ public class Game extends Canvas {
     public boolean notificationShowing = false;
     public JFrame notificationFrame;
 
+    /*
+     * This creates a notification panel which shows a message when the player finishes the game.
+     * Whether the player wins or loses, a different message will be displayed.
+     */
+
     public void showNotificationPanel(Sprite imageSprite) {
         if (!notificationShowing) {
             JPanel notificationPanel = new JPanel();
@@ -50,7 +55,7 @@ public class Game extends Canvas {
     
             ImageIcon imageIcon = new ImageIcon(imageSprite.image);
             Image image = imageIcon.getImage();
-            Image scaledImage = image.getScaledInstance(300, 150, Image.SCALE_SMOOTH); // Set the desired image size
+            Image scaledImage = image.getScaledInstance(300, 150, Image.SCALE_SMOOTH);
             ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
             JLabel imageLabel = new JLabel(scaledImageIcon);
             notificationPanel.add(imageLabel, BorderLayout.CENTER);
@@ -75,7 +80,7 @@ public class Game extends Canvas {
         }
     } 
     
-    /**
+    /*
      * Construct the game and set it running.
      */
 
@@ -83,7 +88,7 @@ public class Game extends Canvas {
         // create a frame to contain the game
         JFrame container = new JFrame("Space Invaders");
 
-        // at the moment of the game's creation, we initialize the background music (from a sound folder).
+        // at the moment of the game's creation, initialize the background music (from a sound folder).
         backgroundMusic = audioStore.getAudio("sound/background.wav");
         backgroundMusic.loop(); // the music keeps playing (loop)
 
@@ -116,12 +121,11 @@ public class Game extends Canvas {
         this.addKeyListener(keyInputHandler);
 
         this.setFocusable(true);
-        //addKeyListener(new KeyInputHandler());
 
         // request the focus so key events come to us
         requestFocus();
 
-        // create the buffering strategy which will allow AWT to manage our accelerated graphics
+        // create the buffering strategy which will allow AWT to manage the accelerated graphics
         createBufferStrategy(2);
         strategy = getBufferStrategy();
 
@@ -129,7 +133,7 @@ public class Game extends Canvas {
         initEntities();
     }
 
-    /**
+    /*
      * Start a fresh game, this should clear out any old data and create a new set.
      */
 
@@ -145,9 +149,9 @@ public class Game extends Canvas {
         firePressed = false;
     }
 
-    /**
-     * Initialise the starting state of the entities (ship and aliens). Each
-     * entity will be added to the overall list of entities in the game.
+    /*
+     * Initialise the starting state of the entities (ship and aliens). 
+     * Each entity will be added to the overall list of entities in the game.
      */
 
     public void initEntities() {
@@ -167,7 +171,7 @@ public class Game extends Canvas {
         }
     }
 
-    /**
+    /*
      * Initialise the boss entity.
      */
 
@@ -177,47 +181,46 @@ public class Game extends Canvas {
         entities.add(boss);
     }
 
-    /**
-     * Notification from a game entity that the logic of the game
-     * should be run at the next opportunity (normally as a result of some
-     * game event)
+    /*
+     * Notification from a game entity that the logic of the game should be run at the next opportunity (normally as a result of some game event)
      */
     public void updateLogic() {
         logicRequiredThisLoop = true;
     }
 
-    /**
-     * Remove an entity from the game. The entity removed will
-     * no longer move or be drawn.
-     *
-     * @param entity The entity that should be removed
+    /*
+     * Remove an entity from the game. 
+     * The entity removed will no longer move or be drawn.
      */
-    public void removeEntity(Entity entity) {
+    public void removeEntity(Entity entity) { // the parameter entity is the entity that should be removed
         removeList.add(entity);
     }
 
-    /**
+    /*
      * Notification that the player has died.
      */
     public void notifyDeath() {
         waitingForKeyPress = true;
         message = "";
         backgroundMusic.stop();
-        Sprite loseSprite = SpriteStore.get().getSprite("sprites/lose.jpg");
+        Sprite loseSprite = SpriteStore.get().getSprite("sprites/lose.jpg"); // an image will be shown
         showNotificationPanel(loseSprite);
     }    
     
-    /**
+    /*
      * Notification that the player has won since all the aliens and the boss have died.
      */
     public void notifyWin() {
         waitingForKeyPress = true;
         message = "";
         backgroundMusic.stop();
-        Sprite winSprite = SpriteStore.get().getSprite("sprites/win.jpg");
+        Sprite winSprite = SpriteStore.get().getSprite("sprites/win.jpg"); // an image will be shown
         showNotificationPanel(winSprite);
     }
     
+    /*
+     * Close the notification panel
+     */
     public void closeNotificationPanel() {
         if (notificationFrame != null) {
             notificationFrame.dispose();
@@ -225,13 +228,14 @@ public class Game extends Canvas {
         }
     }
 
-    /**
+    /*
      * Notification that an alien has been killed
      */
     public void notifyAlienKilled() {
-        // reduce the alien count, if there are none left, the player has won the first level
+        // reduce the alien count, if there are none left, the player has won the level
         alienCount--;
 
+        // when all the aliens are removed, the boss shows up
         if (alienCount == 0 && boss == null) {
             initBoss();
             boss.fire();
@@ -246,9 +250,10 @@ public class Game extends Canvas {
         }
     }
 
-    /**
-     * Attempt to fire a shot from the player. Its called "try"
-     * since we must first check that the player can fire. In order to fire, the player has to wait long enough between shots.
+    /*
+     * Attempt to fire a shot from the player. 
+     * Its called "try" since we must first check that the player can fire. 
+     * In order to fire, the player has to wait long enough between shots.
      */
     public void tryToFire() {
         // check that we have waiting long enough to fire
@@ -263,7 +268,7 @@ public class Game extends Canvas {
         entities.add(shot);
     }
 
-    /**
+    /*
      * The main game loop. This loop is running during all game play as it is responsible for the following activities:
      * <p/>
      * - Working out the speed of the game loop to update moves

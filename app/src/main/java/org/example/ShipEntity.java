@@ -1,6 +1,6 @@
 package org.example;
 
-/**
+/*
  * The entity that represents the players ship
  */
 public class ShipEntity extends Entity {

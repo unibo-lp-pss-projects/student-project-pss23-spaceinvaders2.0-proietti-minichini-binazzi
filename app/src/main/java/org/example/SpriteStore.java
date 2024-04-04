@@ -16,6 +16,9 @@ public class SpriteStore {
      */
     public static final SpriteStore SINGLE_STORE = new SpriteStore();
 
+    public HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
+
+    
     public static SpriteStore get() {
         return SINGLE_STORE;
     }
@@ -23,7 +26,6 @@ public class SpriteStore {
     /**
      * The cached sprite map, from reference to sprite instance
      */
-    public HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 
     public SpriteStore() {
     }
