@@ -58,6 +58,8 @@ public class MenuPage extends JFrame {
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setPreferredSize(new Dimension(300, 200));
 
+
+
         contentLabel = new JLabel("<html><body>Press space bar to shoot and arrows to move</body></html>");
         contentLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         contentLabel.setVisible(false); // initially is not visible
@@ -79,7 +81,6 @@ public class MenuPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // toggle visibility of HTML content when button is pressed
                 contentVisible = !contentVisible;
-        
                 contentLabel.setVisible(contentVisible);
                 buttonPanel.revalidate();
                 buttonPanel.repaint();
@@ -112,8 +113,12 @@ public class MenuPage extends JFrame {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // close the menu page
                 dispose();
-                // start the game
+                /*
+                 * Start the game. Firstly, the background music stops and then the game window opens
+                 */
+                
                 menuMusic.stop();
                 Game game = new Game();
                 game.startGame();
