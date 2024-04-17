@@ -226,7 +226,7 @@ Il componente architetturale fondamentale di Spase Invaders è la classe “Menu
 
 Ultimo componente architetturale, ma non per importanza, utilizzato dal software è la classe “Entity”, la quale rappresenta qualsiasi elemento che appare nel gioco. Uno dei suoi ruoli principali è quello della gestione risoluzione delle collisioni e del movimento implementando vari metodi. La classe Entity, infine, viene estesa in altre quattro classi per poter gestire in maniera indipendente le diverse entità presenti nel gioco riutilizzando i metodi “base” in essa implementati e aggiungendone dei nuovi, ove necessario. 
 
-Design dettagliato
+### Design dettagliato
 
 – BossEntity (Martina) 
 
@@ -271,3 +271,64 @@ classDiagram
 
 ```
 Il diagramma UML mostra la classe BossEntity che gestisce il comportamento del boss nel gioco. La classe ha un'associazione con la classe Game e contiene i metodi per il movimento, l'attacco e la gestione delle collisioni del boss. 
+
+- MenuPage (Michela)
+Problema: Nel progettare la schermata di menù, si sono riscontrate diverse difficoltà. Innanzitutto, capire il corretto funzionamento e implementazione degli elementi che compongono il menù, ovvero i pulsanti. In secondo luogo, passare dal menù alla finestra di gioco attraverso l’uso di uno dei bottoni in modo regolare.  
+Dato che ciascun pulsante, se premuto, esegue una certa azione, far sì che quest’ultime vengano correttamente effettuate è stata la sfida principale. Di fatto, le difficoltà maggiori sono state riscontrate precisamente nel primo e nel terzo pulsante.  
+Il primo è responsabile di far comparire sotto di esso una striga di testo che funge da guida per il giocatore, spiegandogli quali tasti della tastiera devono essere premuti per giocare. Il terzo, invece, svolge il compito più importante. Esso si occupa di avviare la schermata di gioco per poter consentire all’utente di iniziare la partita. Ciò rappresentò la sfida più complessa, poiché nei vari tentativi effettuati, il collegamento tra MenuPage e Game non era sempre eccellente. Più precisamente, i problemi furono: 
+- Il terzo pulsante del menù apre la schermata di gioco ma, né suono né parte grafica, vengono correttamente visualizzate. La finestra di gioco appare completamente bianca. 
+- Il terzo pulsante apre il gioco consentendo all’utente di visualizzarne gli elementi, ma i tasti della sua tastiera non sono funzionanti, ovvero non vengono letti correttamente come input per poter consentire al giocatore di muovere la navicella e sparare. Ciò non permette nemmeno agli alieni di muoversi nello schermo
+
+Soluzione: Gli approcci iniziali al problema furono diversi. Per quanto riguarda il corretto funzionamento dei primi pulsanti e della loro generale implementazione, che comprende dimensione, colore e posizione, la soluzione fu semplice. Bastò semplicemente documentarsi online sull’uso di metodi come ad esempio “.setFont”, “.setForeground” e “.setLayout” e scegliere i più efficaci.  
+Per far funzionare correttamente l’ultimo pulsante, invece, come approccio iniziale era stata aggiunta la schermata di menù all’interno di Game, per fare in modo che si aprisse come primo elemento per poi essere chiusa e lasciare il posto alla finestra di gioco. Dopo diversi tentativi, il menù fu creato come classe a sé stante, dunque al di fuori di classi già esistenti. In questo modo, non solo veniva aperto come primo elemento in modo regolare, ma fu più facile gestirne l’aspetto e le funzionalità. Inoltre, fu sfruttata JFrame, una classe di Java Swing che rappresenta un frame, ossia una finestra, che contiene diversi elementi. MenuPage ne estende le caratteristiche, dunque diventa un tipo di schermata che può essere visualizzata e avere le funzionalità fornite da JFrame.  
+Per poter risolvere invece il problema principale, vale a dire il collegare menù e schermata di gioco, la soluzione fu l’uso di una sequenza di operazioni. Per prima cosa, fu utilizzato il metodo dispose() per poter chiudere la finestra del menù. Poi, la musica di background fu interrotta, per poter lasciare spazio a quella della schermata di gioco. Venne istanziata in seguito una nuova istanza della classe Game, per poter successivamente richiamare il metodo startGame(), appartenente a Game, che inizializza l’ambiente di gioco. Infine, fu utilizzato il seguente codice: “new Thread (() -> { game.gameLoop() }).start() “, che si occupa di avviare un nuovo thread per l’esecuzione del loop di gioco. Ciò viene eseguito per evitare che il ciclo di gioco blocchi l’event dispatch thread (EDT) della GUI (Graphical User Interface). Il loop di gioco, detto gameLoop, è un metodo della classe Game ed è responsabile dell'aggiornamento dello stato del gioco e del rendering della grafica. Trattandosi di un task di lunga durata, creando un nuovo thread specifico per questo metodo, esso viene eseguito in concomitanza con l’EDT, assicurando che l’interfaccia grafica rimanga reattiva mentre la logica di gioco viene eseguita in background. 
+Grazie a questo tipo di approccio, il problema fu risolto correttamente, e la schermata di gioco è ora perfettamente collegata a quella del menù, permettendo all’utente di passare da quest’ultimo, che funge da presentazione a Space Invaders, al gioco vero e proprio.  
+
+Per riassumere, utilizziamo un grafico UML per rappresentare i vari componenti presi in esame. 
+
+```mermaid
+classDiagram 
+    MenuPage --> Game 
+    MenuPage --|> JFrame 
+
+    class Game {
+        - BufferStrategy strategy 
+        - List<Entity> entities 
+        - Entity ship 
+        - BossEntity boss 
+        - boolean gameRunning 
+        - boolean waitingForKeyPress 
+        + showNotificationPanel() 
+        + Game() 
+        + startGame() 
+        + initEntities() 
+        + initBoss() 
+        + gameLoop() 
+    } 
+
+    class MenuPage {
+        - AudioStore audioStore 
+        - AudioClip menuMusic 
+        + MenuPage() 
+    }
+
+    class JFrame {
+        + title: String 
+        + contentPane: Container 
+        + visible: boolean 
+        + setContentPane(contentPane: Container): void 
+        + setTitle(title: String): void 
+        + pack(): void 
+        + setVisible(visible: boolean): void 
+        + add(component: Component): void 
+        + remove(component: Component): void 
+        + setSize(width: int, height: int): void 
+        + getContentPane(): Container 
+        + setLocationRelativeTo(component: Component): void 
+        + addWindowListener(listener: WindowListener): void
+        + dispose(): void 
+    }
+
+```
+
+Nell’UML vengono rappresentate le classi MenuPage, ovvero il menù, e Game, ossia il gioco vero e proprio. La relazione che gli elementi presentano è monodirezionale, ovvero il menù richiama il gioco poichè quest’ultimo viene aperto tramite l’uso di un pulsante presente nella schermata di presentazione di Space Invaders. Nello schema è presente anche JFrame, in modo da esplicitare il fatto che MenuPage ne estenda le caratteristiche. Infatti, molti dei metodi elencati nel grafico furono utilizzati per poter implementare correttamente il menù.  
