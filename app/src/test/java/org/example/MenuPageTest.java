@@ -53,7 +53,6 @@ class MenuPageTest {
         }
     }
 
-
     @Test
     void testStartButtonAction() {
         JButton startButton = null;

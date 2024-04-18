@@ -42,19 +42,18 @@ class ShotEntityTest {
     }
 
     @Test
-void testShotEntityCollisionWithAlien() {
-    // Create a new game instance
-    Game game = new Game();
-    // Create a shot entity at a specific position
-    ShotEntity shot = new ShotEntity(game, "sprites/shot.gif", 100, 200);
-    // Create an alien entity at a specific position
-    AlienEntity alien = new AlienEntity(game, "sprites/alien.gif", 100, 210);
-    // Simulate collision between the shot and the alien
-    shot.collidedWith(alien);
-    // Ensure that the shot has been removed from the game
-    assertFalse(game.entities.contains(shot), "ShotEntity should be removed after collision with AlienEntity");
-    // Ensure that the alien has been removed from the game
-    assertFalse(game.entities.contains(alien), "AlienEntity should be removed after collision with ShotEntity");
-}
-
+    void testShotEntityCollisionWithAlien() {
+        // Create a new game instance
+        Game game = new Game();
+        // Create a shot entity at a specific position
+        ShotEntity shot = new ShotEntity(game, "sprites/shot.gif", 100, 200);
+        // Create an alien entity at a specific position
+        AlienEntity alien = new AlienEntity(game, "sprites/alien.gif", 100, 210);
+        // Simulate collision between the shot and the alien
+        shot.collidedWith(alien);
+        // Ensure that the shot has been removed from the game
+        assertFalse(game.entities.contains(shot), "ShotEntity should be removed after collision with AlienEntity");
+        // Ensure that the alien has been removed from the game
+        assertFalse(game.entities.contains(alien), "AlienEntity should be removed after collision with ShotEntity");
+    }
 }

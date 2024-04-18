@@ -37,7 +37,6 @@ class ShipEntityTest {
         assertEquals(initialX, ship.getX(), "ShipEntity should not move beyond the right boundary");
     }
 
-
     @Test
     void testShipEntityCollisionWithAlien() {
         Game game = new Game();
@@ -48,6 +47,4 @@ class ShipEntityTest {
         ship.collidedWith(alien);
         game.notifyDeath();
     }
-
-
 }
