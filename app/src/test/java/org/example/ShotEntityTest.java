@@ -35,8 +35,6 @@ class ShotEntityTest {
         ShotEntity shot = new ShotEntity(game, "sprites/shot.gif", 100, -150);
         // Simulate movement to move off the screen
         shot.move(100);
-        // Ensure that the entities list is initialized
-        game.initEntities();
         // Remove the shot from the game
         game.removeEntity(shot);
         // Assert that the shot has been removed from the game
