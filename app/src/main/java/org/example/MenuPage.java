@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 
 
 public class MenuPage extends JFrame {
-    private JLabel contentLabel;
+    public JLabel contentLabel;
     public AudioStore audioStore = AudioStore.get();
     public AudioClip menuMusic;
     
