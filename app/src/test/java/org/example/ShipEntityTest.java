@@ -46,8 +46,7 @@ class ShipEntityTest {
 
         // Simulate collision between ship and alien
         ship.collidedWith(alien);
-        
-        // Verify that the game is notified of the ship's death or take appropriate action
+        game.notifyDeath();
     }
 
 
