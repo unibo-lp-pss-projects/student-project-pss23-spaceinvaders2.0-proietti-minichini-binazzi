@@ -336,4 +336,45 @@ classDiagram
 
 ```
 
-Nell’UML vengono rappresentate le classi MenuPage, ovvero il menù, e Game, ossia il gioco vero e proprio. La relazione che gli elementi presentano è monodirezionale, ovvero il menù richiama il gioco poichè quest’ultimo viene aperto tramite l’uso di un pulsante presente nella schermata di presentazione di Space Invaders. Nello schema è presente anche JFrame, in modo da esplicitare il fatto che MenuPage ne estenda le caratteristiche. Infatti, molti dei metodi elencati nel grafico furono utilizzati per poter implementare correttamente il menù.  
+Nell’UML vengono rappresentate le classi MenuPage, ovvero il menù, e Game, ossia il gioco vero e proprio. La relazione che gli elementi presentano è monodirezionale, ovvero il menù richiama il gioco poichè quest’ultimo viene aperto tramite l’uso di un pulsante presente nella schermata di presentazione di Space Invaders. Nello schema è presente anche JFrame, in modo da esplicitare il fatto che MenuPage ne estenda le caratteristiche. Infatti, molti dei metodi elencati nel grafico furono utilizzati per poter implementare correttamente il menù. 
+
+-Collisione (Angelica) 
+
+Problema: la collisione dello sparo è stata una parte complessa dello svolgimento del progetto.  
+
+Soluzione: si è usato il metodo “collidedWith” che gestisce gli eventi di collisione tra il colpo e altre entità. Assicura che venga processato solo un evento di collisione per ogni colpo e procede a rimuovere le entità coinvolte e a notificare il gioco quando il colpo entra in collisione con un'entità di tipo AlienEntity. Questo metodo inoltre utilizza il pattern "Flag" impostando “used” a “true” quando il colpo colpisce un'entità, per evitare che il colpo la colpisca più volte. Il "pattern flag" è un design pattern che viene utilizzato per tenere traccia dello stato di un oggetto mediante l'uso di un flag booleano. Questo flag viene utilizzato per indicare se un particolare evento è già avvenuto o se un'azione è già stata eseguita. Il pattern flag è utile quando si desidera evitare di eseguire un'azione più volte o quando si vuole controllare se un certo evento è già accaduto. 
+
+Viene utilizzato anche Template Method: I metodi “move(long delta)” e “collidedWith(Entity other)” definiscono lo scheletro di un algoritmo con il comportamento generale di movimento e gestione delle collisioni per un'entità colpo (ShotEntity). Questi metodi delegano alcune operazioni specifiche alle sottoclassi attraverso il concetto di ereditarietà. 
+
+In ausilio ai pattern citati viene usato anche Single Responsibility Principle (SRP): Ogni metodo all'interno della classe ShotEntity ha un compito specifico e separato: il metodo “move” si occupa del movimento del colpo, il metodo “collidedWith” gestisce le collisioni e il metodo “createShot” si occupa di creare un nuovo colpo. Questo rispetta il principio SRP, che suggerisce che una classe dovrebbe avere una sola ragione per cambiare.
+
+```mermaid
+classDiagram 
+    class Entity { 
+        <<abstract>> 
+        +String sprite 
+        +int x 
+        +int y 
+        +double dx 
+        +double dy 
+        +Entity(String sprite, int x, int y) 
+        +void move(long delta) 
+        +void collidedWith(Entity other) 
+    } 
+    class ShotEntity { 
+        -double moveSpeed 
+        -Game game 
+        -boolean used 
+        +ShotEntity(Game game, String sprite, int x, int y) 
+        +void move(long delta) 
+        +void collidedWith(Entity other) 
+
+    } 
+    class Game { 
+        +void removeEntity(Entity entity) 
+        +void notifyAlienKilled() 
+    } 
+
+    Entity <|-- ShotEntity 
+    ShotEntity *-- Game
+```
