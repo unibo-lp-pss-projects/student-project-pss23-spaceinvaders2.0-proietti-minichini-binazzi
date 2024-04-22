@@ -379,6 +379,11 @@ classDiagram
     ShotEntity *-- Game
 ```
 
+## Sviluppo
+### Testing automatizzato 
+
+I file di test presenti all’interno del progetto nella cartella “example”, sotto la voce “test”, sono stati sviluppati utilizzando il framework JUnit per verificare il corretto funzionamento di alcune classi. Questo approccio consente di eseguire i test in modo automatico, garantendo che le funzionalità del software siano valide e che eventuali modifiche non introducano regressioni. Infine, uso di suite specifiche come JUnit è vantaggioso, poiché semplifica l'esecuzione e la gestione dei test, contribuendo a una maggiore efficienza nel processo di sviluppo del software. 
+
 ### BossEntityTest.java
 Implementa il testing automatizzato per esaminare il funzionamento della classe BossEntity. Tale test copre diversi aspetti del comportamento di BossEntity: 
 - Inizializzazione: Il test testBossEntityInitialization() verifica che un'istanza di BossEntity sia correttamente inizializzata con le coordinate fornite e che non sia nulla. 
