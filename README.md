@@ -379,6 +379,61 @@ classDiagram
     ShotEntity *-- Game
 ```
 
+### BossEntityTest.java
+Implementa il testing automatizzato per esaminare il funzionamento della classe BossEntity. Tale test copre diversi aspetti del comportamento di BossEntity: 
+- Inizializzazione: Il test testBossEntityInitialization() verifica che un'istanza di BossEntity sia correttamente inizializzata con le coordinate fornite e che non sia nulla. 
+- Movimento: Il test testBossEntityMovement() controlla se l'entità si muove correttamente dopo un certo intervallo di tempo. 
+- Inversione della direzione: Il test testBossEntityReverseDirection() verifica che l'entità inverta la direzione di movimento dopo aver raggiunto il bordo destro dello schermo. 
+- Collisione con proiettile: Il test testBossEntityCollisionWithShot() simula una collisione tra l'entità e un proiettile, assicurandosi che venga emessa una notifica di vittoria. 
+
+
+### MenuPageTest.java
+Effettua il testing automatizzato per verificare il comportamento della classe MenuPage. Questo test si concentra su diversi aspetti critici del funzionamento della pagina di menu: 
+- testTitle(): questo test controlla che il titolo della pagina di menu sia correttamente impostato su "Menu Page". Assicura che il titolo sia congruente con le aspettative. 
+- testContentLabelVisibility(): verifica che l'etichetta del contenuto sulla pagina di menu non sia visibile inizialmente. Questo test assicura che il contenuto sia nascosto come previsto all'avvio della pagina. 
+- testExitButtonAction(): simula il clic sul pulsante "Exit" della pagina di menu e verifica che la finestra della pagina di menu sia chiusa correttamente. Questo test assicura che il pulsante di uscita funzioni come previsto, chiudendo la finestra quando viene cliccato. 
+- testStartButtonAction(): simula il clic sul pulsante "Start Game" della pagina di menu e verifica che la finestra della pagina di menu sia chiusa correttamente. Questo test assicura che il pulsante di avvio del gioco funzioni come previsto, chiudendo la finestra quando viene cliccato. 
+
+
+### GameTest.java
+Esegue una serie di test automatizzati per verificare il comportamento della classe Game. Questi test sono fondamentali per garantire che la logica del gioco funzioni correttamente e che il comportamento atteso sia rispettato. Analizziamo brevemente ciascun test: 
+- testStartGame(): verifica che dopo aver avviato il gioco utilizzando il metodo startGame(), ci siano delle entità presenti nel gioco. Questo è importante perché assicura che l'inizializzazione del gioco abbia creato entità valide e che il gioco sia pronto per essere giocato. 
+- testInitEntities(): controlla che il metodo initEntities() inizializzi correttamente le entità nel gioco. Verifica che ci siano delle entità presenti dopo l'inizializzazione e che siano configurate correttamente per il gioco iniziale. 
+- testNotifyDeath(): assicura che il gioco entri in uno stato di attesa per la pressione di un tasto dopo che il giocatore muore. Questo è essenziale per gestire la transizione tra la fine del gioco e l'avvio di una nuova partita. 
+- testNotifyWin(): Simile al test precedente, verifica che il gioco entri in uno stato di attesa per la pressione di un tasto dopo che il giocatore ha vinto la partita. Questo assicura una corretta gestione del completamento del gioco. 
+- testCloseNotificationPanel(): si accerta che il pannello di notifica venga chiuso correttamente quando viene invocato il metodo closeNotificationPanel(). Assicura che il gioco torni allo stato normale dopo la chiusura della notifica. 
+
+
+### ShipEntityTest.java
+Testing automatizzato per verificare l’andamento della classe ShipEntity. Questo test analizza diversi aspetti del comportamento di questa entità: 
+- testShipEntityInitialization(): test di inizializzazione che verifica la corretta inizializzazione di un’istanza di ShipEntity con delle coordinate (x,y) fornite. È necessario controllare inoltre che l’istanza non sia nulla. 
+- testShipEntityLeftBoundary(): test che inizialmente crea un’istanza di ShipEntity con una posizione iniziale vicina al bordo sinistro dello schermo. Viene poi eseguito il metodo “move” per spostare la navicella verso il confine sinistro, e infine viene verificato che la sua posizione finale rimanga invariata. In particolare, verifica che la coordinata x finale della nave (ship.getX()) sia uguale alla sua coordinata x iniziale (initialX). 
+- testShipEntityRightBoundary(): test simile al precedente. In questo caso, l’entità Ship viene spostata con il metodo “move” verso il confine destro dello schermo, per poter controllare che la sua posizione finale rimanga invariata.  
+- testShipEntityCollisionWithAlien(): test che simula la collisione della navicella con un’entità Alien. Se va a buon fine, viene visualizzata una notifica di sconfitta, in quanto la navicella del giocatore, per poter vincere, deve eliminare tutti gli alieni evitando di essere raggiunto da questi.  
+
+
+### ShotEntityTest.java
+Verifica in automatico il comportamento della classe ShotEntity. Questo test, come visto nei precedenti, analizza diversi aspetti di Shot: 
+- testShotEntityInitialization(): test che inizializza un’istanza di ShotEntity con delle coordinate precise, assicurandosi che non sia nulla. Inoltre, verifica che la velocità dello sparo sia corretta. 
+- testShotEntityMovement(): test che registra la posizione Y iniziale dell'entità, la sposta con il metodo “move” e si assicura che questa sia stata spostata verso l'alto (la posizione Y è diminuita). 
+- testShotEntityRemovalOffScreen(): test che si occupa di verificare la corretta rimozione dell’entità sparo una volta che questa si muove al di fuori dello schermo. Il test simula questo comportamento in modo da poter poi rimuovere l’entità come previsto. 
+- testShotEntityCollisionWithAlien(): test che simula la collisione tra lo sparo e un’entità Alien. Si assicura che, in caso di collisione, entrambe le entità vengano rimosse. 
+
+
+### SpriteTest.java
+Implementa il testing automatizzato per verificare l’andamento della classe Sprite, più nello specifico: 
+- testGetWidth() e testGetHeight() verificano se i metodi getWidth() e getHeight() della classe Sprite restituiscono correttamente rispettivamente la larghezza e l’altezza dell'immagine associata alla Sprite. Entrambi, dunque, creano un'istanza di BufferedImage con larghezza e altezza entrambe impostate su 50 pixel e tipo di immagine TYPE_INT_ARGB, per poi istanziare una Sprite utilizzando l'immagine appena creata. Successivamente i test verificano se i valori restituiti dai metodi getWidth() e GetHeight() sono uguali a 50. 
+- testDraw() verifica se il metodo draw() della classe Sprite disegna correttamente l'immagine nell'oggetto Graphics2D, mantenendo le dimensioni originali dell'immagine. Il test per prima cosa crea un'istanza di BufferedImage come nel test precedentemente descritto, poi ottiene un oggetto Graphics2D associato all'immagine creata per generare un'istanza di Sprite. Successivamente chiama il metodo draw() passandogli l'oggetto Graphics2D e le coordinate (0,0) per poi verificare se le dimensioni dell'immagine sono rimaste invariate dopo il disegno. 
+
+
+### AudioClipTest.java 
+- testPlay controlla che il metodo play() non generi eccezioni quando viene chiamato. il test per prima cosa chiama il metodo play() su un oggetto audioClip. Poi utilizza un blocco try-catch per gestire qualsiasi eccezione che potrebbe essere generata durante l'esecuzione del metodo play(). Se il metodo play() viene eseguito senza generare eccezioni, il test passerà. Stessa cosa avviene per i test dei metodi Loop() e Stop(). 
+- testGetClip confronta l'oggetto restituito dal metodo getClip() dell'oggetto audioClip con l'oggetto clip per verificare se sono uguali. il test chiama il metodo getClip() sull'oggetto audioClip e Confronta l'oggetto restituito con l'oggetto clip utilizzando assertEquals. Se i due oggetti non sono uguali, il test fallisce. 
+
+
+Questi test forniscono una copertura di base per le funzionalità critiche del gioco, garantendo che il suo comportamento sia coerente con le aspettative e che eventuali modifiche non introducano regressioni indesiderate. 
+
+Inoltre, l'utilizzo di suite specifiche come JUnit semplifica l'esecuzione e la gestione dei test, contribuendo a una maggiore efficienza nel processo di sviluppo del software.
 ## Sviluppo
 ### Testing automatizzato 
 
