@@ -439,7 +439,6 @@ Implementa il testing automatizzato per verificare l’andamento della classe Sp
 Questi test forniscono una copertura di base per le funzionalità critiche del gioco, garantendo che il suo comportamento sia coerente con le aspettative e che eventuali modifiche non introducano regressioni indesiderate. 
 
 Inoltre, l'utilizzo di suite specifiche come JUnit semplifica l'esecuzione e la gestione dei test, contribuendo a una maggiore efficienza nel processo di sviluppo del software.
-## Sviluppo
-### Testing automatizzato 
 
-I file di test presenti all’interno del progetto nella cartella “example”, sotto la voce “test”, sono stati sviluppati utilizzando il framework JUnit per verificare il corretto funzionamento di alcune classi. Questo approccio consente di eseguire i test in modo automatico, garantendo che le funzionalità del software siano valide e che eventuali modifiche non introducano regressioni. Infine, uso di suite specifiche come JUnit è vantaggioso, poiché semplifica l'esecuzione e la gestione dei test, contribuendo a una maggiore efficienza nel processo di sviluppo del software. 
+
+## Note di sviluppo
