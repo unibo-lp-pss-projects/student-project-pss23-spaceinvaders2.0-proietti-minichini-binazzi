@@ -591,4 +591,60 @@ GridBagLayout è un gestore di layout flessibile e potente, che consente di disp
 
 Questo metodo è fondamentale per creare interfacce utente funzionali, soprattutto in applicazioni complesse come i giochi, dove la disposizione dei componenti deve essere dinamica e adattabile a diverse dimensioni e risoluzioni dello schermo. La complessità deriva dalla specifica dettagliata dei vincoli di layout e dalla necessità di capire come questi influenzino il posizionamento e il dimensionamento dei componenti all'interno del layout. 
 
+### Angelica
+### Uso di BufferStrategy per il rendering 
+#### Dove: Game 
+#### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
+#### Snippet: 
+java 
+public class Game extends Canvas { 
+    // ... altre variabili e metodi 
+    public void gameLoop() { 
+        // ... ciclo principale del gioco 
+        createBufferStrategy(2); 
+        strategy = getBufferStrategy(); 
+        // ... altre operazioni nel loop 
+        Graphics2D g = (Graphics2D) strategy.getDrawGraphics(); 
+        // ... disegno delle entità e pulizia del buffer 
+        g.dispose(); 
+        strategy.show(); 
+    } 
+} 
  
+Utilizzando BufferStrategy, il gioco gestisce il rendering in modo efficiente, eliminando artefatti visivi come lo screen tearing e migliorando le prestazioni complessive. Lo screen tearing si verifica quando il monitor aggiorna parzialmente l'immagine visualizzata durante il rendering di un nuovo frame. Con BufferStrategy, l'immagine completa viene disegnata in un buffer di memoria prima di essere visualizzata sullo schermo, evitando lo screen tearing. Inoltre, l'utilizzo di più buffer di memoria potrebbe compromettere la fluidità del rendering, ma grazie a BufferStrategy, che consente il disegno dei frame successivi mentre quello corrente viene mostrato, si ottiene una fluidità ottimale. 
+
+
+### Uso di Java Swing per la gestione dell'interfaccia grafica 
+#### Dove:  Game 
+#### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
+#### Snippet: 
+ java 
+public class Game extends Canvas { 
+    // ... altre variabili e metodi 
+    public Game() { 
+        // ... inizializzazione del frame e del canvas 
+        SwingUtilities.invokeLater(new Runnable() { 
+            @Override 
+            public void run() { 
+                new Game(); 
+            } 
+        }); 
+    } 
+} 
+ 
+Utilizzando SwingUtilities.invokeLater(), il gioco viene avviato all'interno dell'Event Dispatch Thread (EDT); SwingUtilities.invokeLater() garantisce la sicurezza delle operazioni Swing e la corretta gestione dell'interfaccia grafica. Più nello specifico, assicura che il codice venga eseguito nell'EDT, anche se viene chiamato da un thread diverso. Se il codice che modifica l'interfaccia utente viene eseguito da un thread diverso dall'EDT, potrebbero verificarsi problemi di concorrenza, come la visualizzazione di componenti GUI non aggiornate o l'eccezione IllegalStateException. InvokeLater() risolve questo problema assicurando che il codice venga eseguito in modo sicuro nell'EDT.
+
+
+### Uso di HashMap per memorizzare le istanze di oggetti Sprite in base alla loro chiave
+#### Dove: SpriteStone 
+#### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/SpriteStone.java
+java 
+public class SpriteStore { 
+    public static final SpriteStore SINGLE_STORE = new SpriteStore(); 
+    public HashMap<String, Sprite> sprites = new HashMap<String, Sprite>(); 
+    }
+public static SpriteStore get() { 
+        return SINGLE_STORE; 
+    } 
+ 
+la HashMap memorizza coppie di valori chiave-valore, dove la chiave è una stringa che rappresenta il riferimento all'immagine della Sprite, e il valore è l'istanza dell'oggetto Sprite corrispondente. Quindi, quando viene richiesto una Sprite utilizzando un riferimento all'immagine, la HashMap viene controllata per vedere se l'oggetto corrispondente è già stato caricato in precedenza. In caso affermativo, viene restituito la Sprite memorizzata, altrimenti viene caricata la Sprite dal file, memorizzato nella HashMap e restituito. In questo modo, viene evitato il continuo caricamento delle stesse immagini, migliorando le prestazioni del programma, specialmente in un contesto in cui le immagini vengono utilizzate più volte.
