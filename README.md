@@ -518,7 +518,7 @@ Utilizza la classe `Timer` per pianificare e ripetere il fuoco del boss ad inter
 Utilizza un approccio "brute force" per gestire le collisioni tra tutte le entità nel gioco. Questo metodo può risultare inefficiente con un numero elevato di entità, ma è semplice da implementare e funziona bene per giochi con un numero limitato di elementi. Inoltre, gestisce specificamente le collisioni tra i proiettili del boss e le altre entità. 
 
 ### Michela
-### Custom painting con `paintComponent()`
+### Custom painting con paintComponent()
 #### Dove: MenuPage
 #### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/MenuPage.java
 #### Snippet:
@@ -566,7 +566,7 @@ public void collidedWith(Entity other) {
 ```
 Il metodo `collidedWith()` della classe ShipEntity è fondamentale per gestire gli eventi di collisione che coinvolgono la navicella del giocatore. Accetta come parametro un oggetto Entity, che rappresenta l'entità con cui la nave si è scontrata. Utilizzando una logica condizionale, il metodo determina se l'entità che si è scontrata è un alieno (AlienEntity) o uno sparo (ShotEntity). Se l'entità che ha subito la collisione appartiene a uno di questi tipi, una notifica di sconfitta verrà visualizzata all’interno della finestra di gioco, poiché significa che l’utente ha perso la partita.  La complessità deriva dalla gestione degli eventi di collisione in un ambiente di gioco, compresa l'identificazione dei tipi di entità in collisione e l'orchestrazione dei corrispondenti cambiamenti di stato del gioco. 
 
-### Componenti della GUI nel `backgroundPanel`
+### Componenti della GUI nel backgroundPanel
 #### Dove: MenuPage
 #### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/MenuPage.java
 #### Snippet:
@@ -592,7 +592,7 @@ Dimostra l'uso di `GridBagLayout` e `GridBagConstraints` per gestire la disposiz
 Questo metodo è fondamentale per creare interfacce utente funzionali, soprattutto in applicazioni complesse come i giochi, dove la disposizione dei componenti deve essere dinamica e adattabile a diverse dimensioni e risoluzioni dello schermo. La complessità deriva dalla specifica dettagliata dei vincoli di layout e dalla necessità di capire come questi influenzino il posizionamento e il dimensionamento dei componenti all'interno del layout. 
 
 ### Angelica
-### Uso di `BufferStrategy` per il rendering 
+### Uso di BufferStrategy per il rendering 
 #### Dove: Game 
 #### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
 #### Snippet: 
@@ -614,7 +614,7 @@ public class Game extends Canvas {
 Utilizzando `BufferStrategy`, il gioco gestisce il rendering in modo efficiente, eliminando artefatti visivi come lo screen tearing e migliorando le prestazioni complessive. Lo screen tearing si verifica quando il monitor aggiorna parzialmente l'immagine visualizzata durante il rendering di un nuovo frame. Con `BufferStrategy`, l'immagine completa viene disegnata in un buffer di memoria prima di essere visualizzata sullo schermo, evitando lo screen tearing. Inoltre, l'utilizzo di più buffer di memoria potrebbe compromettere la fluidità del rendering, ma grazie a `BufferStrategy`, che consente il disegno dei frame successivi mentre quello corrente viene mostrato, si ottiene una fluidità ottimale. 
 
 
-### Uso di `Java Swing` per la gestione dell'interfaccia grafica 
+### Uso di Java Swing per la gestione dell'interfaccia grafica 
 #### Dove:  Game 
 #### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
 #### Snippet: 
@@ -635,7 +635,7 @@ public class Game extends Canvas {
 Utilizzando `SwingUtilities.invokeLater()`, il gioco viene avviato all'interno dell'`Event Dispatch Thread (EDT)`; `SwingUtilities.invokeLater()` garantisce la sicurezza delle operazioni Swing e la corretta gestione dell'interfaccia grafica. Più nello specifico, assicura che il codice venga eseguito nell'EDT, anche se viene chiamato da un thread diverso. Se il codice che modifica l'interfaccia utente viene eseguito da un thread diverso dall'EDT, potrebbero verificarsi problemi di concorrenza, come la visualizzazione di componenti GUI non aggiornate o l'eccezione `IllegalStateException`. InvokeLater() risolve questo problema assicurando che il codice venga eseguito in modo sicuro nell'EDT.
 
 
-### Uso di `HashMap` per memorizzare le istanze di oggetti Sprite in base alla loro chiave
+### Uso di HashMap per memorizzare le istanze di oggetti Sprite in base alla loro chiave
 #### Dove: SpriteStone 
 #### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/SpriteStone.java
 ```java 
@@ -648,3 +648,6 @@ public static SpriteStore get() {
     } 
 ```
 la `HashMap` memorizza coppie di valori chiave-valore, dove la chiave è una stringa che rappresenta il riferimento all'immagine della Sprite, e il valore è l'istanza dell'oggetto Sprite corrispondente. Quindi, quando viene richiesto una Sprite utilizzando un riferimento all'immagine, la `HashMap` viene controllata per vedere se l'oggetto corrispondente è già stato caricato in precedenza. In caso affermativo, viene restituito la Sprite memorizzata, altrimenti viene caricata la Sprite dal file, memorizzato nella `HashMap` e restituito. In questo modo, viene evitato il continuo caricamento delle stesse immagini, migliorando le prestazioni del programma, specialmente in un contesto in cui le immagini vengono utilizzate più volte.
+
+
+## Commenti finali
