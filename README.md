@@ -651,3 +651,12 @@ la `HashMap` memorizza coppie di valori chiave-valore, dove la chiave è una str
 
 
 ## Commenti finali
+Per riassumere, l’applicazione software realizzata in Java vuole creare una versione 2.0, ossia una rivisitazione, del famoso gioco Space Invaders. Gli elementi principali come la navicella spaziale e gli alieni sono stati mantenuti invariati come nella versione originale, in modo da non allontanarsi troppo dal gioco tradizionale, con l’aggiunta però di una sprite identificativa innovativa che ne rivoluziona lo stile.  
+
+Anche fattori grafici come le immagini di sfondo di gioco e del menù iniziale sono stati aggiunti in modo tale da distaccarsi dalla loro versione originale, per poter rendere lo stile di gioco più moderno.  
+
+Altri elementi come le barriere che consentono al giocatore di proteggersi dagli spari degli alieni o il fatto di poter avere molteplici “vite”, ossia possibilità, prima di perdere la partita definitivamente, non sono stati implementati all’interno del presente progetto. Altri esempi sono: l’esistenza di svariati livelli di gioco, l’abilità delle orde nemiche di poter contrattaccare sparando come la navicella spaziale e un conteggio dei punti del giocatore.  
+
+I casi citati in precedenza corrispondono a possibili fattori da inserire in futuro all’interno di Space Invaders. Insieme ad essi, si potrebbe includere l’aggiunta di una “barra della vita” che funge contatore dei punti vita del boss in modo da far capire al giocatore quante volte bisogna colpirlo per eliminarlo. Inoltre, si potrebbero implementare tre diverse modalità di gioco: facile, medio, difficile. Ciascuna corrisponde ad una versione del gioco leggermente diversa. Ad esempio, selezionando la terza opzione, gli alieni potrebbero essere in grado di muoversi verso il giocatore molto più velocemente rispetto alla prima modalità, oppure avrebbero l’abilità di sparare come le altre entità.  
+
+Tuttavia, sono stati implementati diversi elementi innovativi non presenti nella versione originale del gioco. Tra questi notiamo: l’introduzione dell’entità boss al terminare dell’orda di alieni presente, la sua abilità di sparare proiettili contro il giocatore e la presenza di due finestre che fungono da notifica per l’utente in caso di vincita o perdita.
