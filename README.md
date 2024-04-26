@@ -442,3 +442,79 @@ Inoltre, l'utilizzo di suite specifiche come JUnit semplifica l'esecuzione e la 
 
 
 ## Note di sviluppo
+### Martina
+### Gestione degli eventi di input con KeyAdapter 
+In questo caso: KeyInputHandler, KeyAdapter, KeyEvent, keyPressed, keyReleased, keyTyped 
+Dove: Game 
+Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
+Snippet: 
+```java 
+public class Game extends Canvas { 
+    // ... altre variabili e metodi 
+    public class KeyInputHandler extends KeyAdapter { 
+        public void keyPressed(KeyEvent e) { 
+            // ... gestione degli eventi di pressione dei tasti 
+        } 
+        public void keyReleased(KeyEvent e) { 
+            // ... gestione degli eventi di rilascio dei tasti 
+        } 
+        public void keyTyped(KeyEvent e) { 
+            // ... gestione degli eventi di digitazione dei tasti 
+        } 
+    } 
+} 
+``` 
+Utilizzando una classe interna che estende `KeyAdapter`, il gioco gestisce in modo efficace gli eventi di input da tastiera, come la pressione, il rilascio e la digitazione dei tasti, semplificando la gestione dei controlli del giocatore. 
+
+
+### Uso di Timer per il fuoco del boss 
+In questo caso: Timer, TimerTask, scheduleAtFixedRate 
+Dove:  BossEntity 
+Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/BossEntity.java 
+Snippet: 
+ ```java 
+private Timer shotTimer; 
+    public BossEntity(Game game, String sprite, int x, int y) { 
+        super(sprite, x, y); 
+        // other initialization code... 
+        this.shotTimer = new Timer(); 
+        this.shotTimer.scheduleAtFixedRate(new TimerTask() { 
+            @Override 
+            public void run() { 
+                fire(); 
+            } 
+        }, 1000, 1000); 
+    } 
+``` 
+Utilizza la classe `Timer` per pianificare e ripetere il fuoco del boss ad intervalli regolari. Questo approccio permette di gestire facilmente il comportamento periodico del fuoco senza dover implementare manualmente un sistema di timeout e schedulazione.
+
+
+### Gestione delle collisioni efficiente 
+Dove: in Entity e sue relative estensioni ma gestite in Game 
+Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
+Snippet: 
+```java 
+    // Brute force collisions 
+    for (int p = 0; p < entities.size(); p++) { 
+        for (int s = p + 1; s < entities.size(); s++) { 
+            Entity me = entities.get(p); 
+            Entity him = entities.get(s); 
+            // handle collision between entities 
+            if (me.collidesWith(him)) { 
+                me.collidedWith(him); 
+                him.collidedWith(me); 
+             } 
+            // Check collision between boss's shots and other entities 
+            if ((me instanceof ShotEntity && him instanceof BossEntity) || 
+                (him instanceof ShotEntity && me instanceof BossEntity)) { 
+                 if (me.collidesWith(him)) { 
+                    me.collidedWith(him); 
+                    him.collidedWith(me); 
+                 } 
+             } 
+         } 
+     } 
+``` 
+Utilizza un approccio "brute force" per gestire le collisioni tra tutte le entità nel gioco. Questo metodo può risultare inefficiente con un numero elevato di entità, ma è semplice da implementare e funziona bene per giochi con un numero limitato di elementi. Inoltre, gestisce specificamente le collisioni tra i proiettili del boss e le altre entità. 
+
+ 
