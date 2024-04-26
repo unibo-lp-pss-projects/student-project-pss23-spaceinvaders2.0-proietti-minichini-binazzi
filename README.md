@@ -444,7 +444,7 @@ Inoltre, l'utilizzo di suite specifiche come JUnit semplifica l'esecuzione e la 
 ## Note di sviluppo
 ### Martina
 ### Gestione degli eventi di input con KeyAdapter 
-In questo caso: KeyInputHandler, KeyAdapter, KeyEvent, keyPressed, keyReleased, keyTyped 
+In questo caso: `KeyInputHandler`, `KeyAdapter`, `KeyEvent`, `keyPressed`, `keyReleased`, `keyTyped` 
 Dove: Game 
 Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
 Snippet: 
@@ -468,7 +468,7 @@ Utilizzando una classe interna che estende `KeyAdapter`, il gioco gestisce in mo
 
 
 ### Uso di Timer per il fuoco del boss 
-In questo caso: Timer, TimerTask, scheduleAtFixedRate 
+In questo caso: `Timer`, `TimerTask`, `scheduleAtFixedRate` 
 Dove:  BossEntity 
 Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/BossEntity.java 
 Snippet: 
