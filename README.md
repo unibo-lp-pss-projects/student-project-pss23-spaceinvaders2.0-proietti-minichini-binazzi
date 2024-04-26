@@ -518,7 +518,7 @@ Utilizza la classe `Timer` per pianificare e ripetere il fuoco del boss ad inter
 Utilizza un approccio "brute force" per gestire le collisioni tra tutte le entità nel gioco. Questo metodo può risultare inefficiente con un numero elevato di entità, ma è semplice da implementare e funziona bene per giochi con un numero limitato di elementi. Inoltre, gestisce specificamente le collisioni tra i proiettili del boss e le altre entità. 
 
 ### Michela
-### Custom painting con paintComponent()
+### Custom painting con `paintComponent()`
 #### Dove: MenuPage
 #### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/MenuPage.java
 #### Snippet:
@@ -544,8 +544,8 @@ Utilizza un approccio "brute force" per gestire le collisioni tra tutte le entit
         } 
 
 ```
-paintComponent() è un metodo fornito dalla classe JComponent di Swing, che è una superclasse di vari componenti Swing come JPanel, JButton, ecc. Viene chiamato automaticamente dal framework Swing ogni volta che un componente deve essere dipinto o ridipinto sullo schermo.
-Nella classe MenuPage, il metodo paintComponent() è sovrascritto all'interno di una classe interna anonima definita nell'istanziazione di backgroundPanel. Questo metodo è fondamentale per personalizzare il comportamento del pannello di sfondo (backgroundPanel). Quando viene invocato, riceve come parametro un oggetto Graphics (g), che rappresenta il contesto grafico per la pittura. La prima azione all'interno del metodo è l'invocazione di super.paintComponent(g), assicurando che qualsiasi comportamento di pittura predefinito fornito dalla superclasse venga eseguito per primo. Successivamente, viene eseguito un controllo condizionale per verificare la disponibilità dell'immagine di sfondo (backgroundImage). Se l'immagine esiste, viene disegnata nel contesto grafico del pannello con il metodo drawImage(). Questo processo garantisce che l'immagine di sfondo, se presente, contribuisca all'aspetto visivo dell'interfaccia del menu, migliorando l'esperienza complessiva dell'utente. 
+`paintComponent()` è un metodo fornito dalla classe JComponent di Swing, che è una superclasse di vari componenti Swing come `JPanel`, `JButton`, ecc. Viene chiamato automaticamente dal framework Swing ogni volta che un componente deve essere dipinto o ridipinto sullo schermo.
+Nella classe MenuPage, il metodo `paintComponent()` è sovrascritto all'interno di una classe interna anonima definita nell'istanziazione di `backgroundPanel`. Questo metodo è fondamentale per personalizzare il comportamento del pannello di sfondo (backgroundPanel). Quando viene invocato, riceve come parametro un oggetto Graphics (g), che rappresenta il contesto grafico per la pittura. La prima azione all'interno del metodo è l'invocazione di `super.paintComponent(g)`, assicurando che qualsiasi comportamento di pittura predefinito fornito dalla superclasse venga eseguito per primo. Successivamente, viene eseguito un controllo condizionale per verificare la disponibilità dell'immagine di sfondo (backgroundImage). Se l'immagine esiste, viene disegnata nel contesto grafico del pannello con il metodo `drawImage()`. Questo processo garantisce che l'immagine di sfondo, se presente, contribuisca all'aspetto visivo dell'interfaccia del menu, migliorando l'esperienza complessiva dell'utente. 
 
 ### Gestione delle collisioni tra navicella, entità aliena e sparo 
 #### Dove: ShipEntity
@@ -564,9 +564,9 @@ public void collidedWith(Entity other) {
 
     } 
 ```
-Il metodo collidedWith() della classe ShipEntity è fondamentale per gestire gli eventi di collisione che coinvolgono la navicella del giocatore. Accetta come parametro un oggetto Entity, che rappresenta l'entità con cui la nave si è scontrata. Utilizzando una logica condizionale, il metodo determina se l'entità che si è scontrata è un alieno (AlienEntity) o uno sparo (ShotEntity). Se l'entità che ha subito la collisione appartiene a uno di questi tipi, una notifica di sconfitta verrà visualizzata all’interno della finestra di gioco, poiché significa che l’utente ha perso la partita.  La complessità deriva dalla gestione degli eventi di collisione in un ambiente di gioco, compresa l'identificazione dei tipi di entità in collisione e l'orchestrazione dei corrispondenti cambiamenti di stato del gioco. 
+Il metodo `collidedWith()` della classe ShipEntity è fondamentale per gestire gli eventi di collisione che coinvolgono la navicella del giocatore. Accetta come parametro un oggetto Entity, che rappresenta l'entità con cui la nave si è scontrata. Utilizzando una logica condizionale, il metodo determina se l'entità che si è scontrata è un alieno (AlienEntity) o uno sparo (ShotEntity). Se l'entità che ha subito la collisione appartiene a uno di questi tipi, una notifica di sconfitta verrà visualizzata all’interno della finestra di gioco, poiché significa che l’utente ha perso la partita.  La complessità deriva dalla gestione degli eventi di collisione in un ambiente di gioco, compresa l'identificazione dei tipi di entità in collisione e l'orchestrazione dei corrispondenti cambiamenti di stato del gioco. 
 
-### Componenti della GUI nel backgroundPanel
+### Componenti della GUI nel `backgroundPanel`
 #### Dove: MenuPage
 #### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/MenuPage.java
 #### Snippet:
@@ -585,18 +585,18 @@ backgroundPanel.setLayout(new GridBagLayout());
 
 backgroundPanel.add(buttonPanel, gbc); 
 ```
-Dimostra l'uso di GridBagLayout e GridBagConstraints per gestire la disposizione dei componenti della GUI all'interno del backgroundPanel nella classe MenuPage. 
+Dimostra l'uso di `GridBagLayout` e `GridBagConstraints` per gestire la disposizione dei componenti della GUI all'interno del `backgroundPanel` nella classe MenuPage. 
 
-GridBagLayout è un gestore di layout flessibile e potente, che consente di disporre i componenti in modo simile a una griglia, con dimensioni e allineamenti diversi. In questo caso, l'oggetto GridBagConstraints viene utilizzato per specificare i vincoli per il posizionamento del buttonPanel all'interno del backgroundPanel. Impostando proprietà come la posizione della griglia, gli insets e l'ancoraggio (anchor), si ottiene un controllo preciso sul layout, assicurando che il pannello sia posizionata correttamente all'interno dell'interfaccia.  
+`GridBagLayout` è un gestore di layout flessibile e potente, che consente di disporre i componenti in modo simile a una griglia, con dimensioni e allineamenti diversi. In questo caso, l'oggetto `GridBagConstraints` viene utilizzato per specificare i vincoli per il posizionamento del `buttonPanel` all'interno del `backgroundPanel`. Impostando proprietà come la posizione della griglia, gli insets e l'ancoraggio (anchor), si ottiene un controllo preciso sul layout, assicurando che il pannello sia posizionata correttamente all'interno dell'interfaccia.  
 
 Questo metodo è fondamentale per creare interfacce utente funzionali, soprattutto in applicazioni complesse come i giochi, dove la disposizione dei componenti deve essere dinamica e adattabile a diverse dimensioni e risoluzioni dello schermo. La complessità deriva dalla specifica dettagliata dei vincoli di layout e dalla necessità di capire come questi influenzino il posizionamento e il dimensionamento dei componenti all'interno del layout. 
 
 ### Angelica
-### Uso di BufferStrategy per il rendering 
+### Uso di `BufferStrategy` per il rendering 
 #### Dove: Game 
 #### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
 #### Snippet: 
-java 
+```java 
 public class Game extends Canvas { 
     // ... altre variabili e metodi 
     public void gameLoop() { 
@@ -610,15 +610,15 @@ public class Game extends Canvas {
         strategy.show(); 
     } 
 } 
- 
-Utilizzando BufferStrategy, il gioco gestisce il rendering in modo efficiente, eliminando artefatti visivi come lo screen tearing e migliorando le prestazioni complessive. Lo screen tearing si verifica quando il monitor aggiorna parzialmente l'immagine visualizzata durante il rendering di un nuovo frame. Con BufferStrategy, l'immagine completa viene disegnata in un buffer di memoria prima di essere visualizzata sullo schermo, evitando lo screen tearing. Inoltre, l'utilizzo di più buffer di memoria potrebbe compromettere la fluidità del rendering, ma grazie a BufferStrategy, che consente il disegno dei frame successivi mentre quello corrente viene mostrato, si ottiene una fluidità ottimale. 
+``` 
+Utilizzando `BufferStrategy`, il gioco gestisce il rendering in modo efficiente, eliminando artefatti visivi come lo screen tearing e migliorando le prestazioni complessive. Lo screen tearing si verifica quando il monitor aggiorna parzialmente l'immagine visualizzata durante il rendering di un nuovo frame. Con `BufferStrategy`, l'immagine completa viene disegnata in un buffer di memoria prima di essere visualizzata sullo schermo, evitando lo screen tearing. Inoltre, l'utilizzo di più buffer di memoria potrebbe compromettere la fluidità del rendering, ma grazie a `BufferStrategy`, che consente il disegno dei frame successivi mentre quello corrente viene mostrato, si ottiene una fluidità ottimale. 
 
 
-### Uso di Java Swing per la gestione dell'interfaccia grafica 
+### Uso di `Java Swing` per la gestione dell'interfaccia grafica 
 #### Dove:  Game 
 #### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
 #### Snippet: 
- java 
+```java 
 public class Game extends Canvas { 
     // ... altre variabili e metodi 
     public Game() { 
@@ -631,14 +631,14 @@ public class Game extends Canvas {
         }); 
     } 
 } 
- 
-Utilizzando SwingUtilities.invokeLater(), il gioco viene avviato all'interno dell'Event Dispatch Thread (EDT); SwingUtilities.invokeLater() garantisce la sicurezza delle operazioni Swing e la corretta gestione dell'interfaccia grafica. Più nello specifico, assicura che il codice venga eseguito nell'EDT, anche se viene chiamato da un thread diverso. Se il codice che modifica l'interfaccia utente viene eseguito da un thread diverso dall'EDT, potrebbero verificarsi problemi di concorrenza, come la visualizzazione di componenti GUI non aggiornate o l'eccezione IllegalStateException. InvokeLater() risolve questo problema assicurando che il codice venga eseguito in modo sicuro nell'EDT.
+```
+Utilizzando `SwingUtilities.invokeLater()`, il gioco viene avviato all'interno dell'`Event Dispatch Thread (EDT)`; `SwingUtilities.invokeLater()` garantisce la sicurezza delle operazioni Swing e la corretta gestione dell'interfaccia grafica. Più nello specifico, assicura che il codice venga eseguito nell'EDT, anche se viene chiamato da un thread diverso. Se il codice che modifica l'interfaccia utente viene eseguito da un thread diverso dall'EDT, potrebbero verificarsi problemi di concorrenza, come la visualizzazione di componenti GUI non aggiornate o l'eccezione `IllegalStateException`. InvokeLater() risolve questo problema assicurando che il codice venga eseguito in modo sicuro nell'EDT.
 
 
-### Uso di HashMap per memorizzare le istanze di oggetti Sprite in base alla loro chiave
+### Uso di `HashMap` per memorizzare le istanze di oggetti Sprite in base alla loro chiave
 #### Dove: SpriteStone 
 #### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/SpriteStone.java
-java 
+```java 
 public class SpriteStore { 
     public static final SpriteStore SINGLE_STORE = new SpriteStore(); 
     public HashMap<String, Sprite> sprites = new HashMap<String, Sprite>(); 
@@ -646,5 +646,5 @@ public class SpriteStore {
 public static SpriteStore get() { 
         return SINGLE_STORE; 
     } 
- 
-la HashMap memorizza coppie di valori chiave-valore, dove la chiave è una stringa che rappresenta il riferimento all'immagine della Sprite, e il valore è l'istanza dell'oggetto Sprite corrispondente. Quindi, quando viene richiesto una Sprite utilizzando un riferimento all'immagine, la HashMap viene controllata per vedere se l'oggetto corrispondente è già stato caricato in precedenza. In caso affermativo, viene restituito la Sprite memorizzata, altrimenti viene caricata la Sprite dal file, memorizzato nella HashMap e restituito. In questo modo, viene evitato il continuo caricamento delle stesse immagini, migliorando le prestazioni del programma, specialmente in un contesto in cui le immagini vengono utilizzate più volte.
+```
+la `HashMap` memorizza coppie di valori chiave-valore, dove la chiave è una stringa che rappresenta il riferimento all'immagine della Sprite, e il valore è l'istanza dell'oggetto Sprite corrispondente. Quindi, quando viene richiesto una Sprite utilizzando un riferimento all'immagine, la `HashMap` viene controllata per vedere se l'oggetto corrispondente è già stato caricato in precedenza. In caso affermativo, viene restituito la Sprite memorizzata, altrimenti viene caricata la Sprite dal file, memorizzato nella `HashMap` e restituito. In questo modo, viene evitato il continuo caricamento delle stesse immagini, migliorando le prestazioni del programma, specialmente in un contesto in cui le immagini vengono utilizzate più volte.
