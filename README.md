@@ -445,9 +445,9 @@ Inoltre, l'utilizzo di suite specifiche come JUnit semplifica l'esecuzione e la 
 ### Martina
 ### Gestione degli eventi di input con KeyAdapter 
 In questo caso: `KeyInputHandler`, `KeyAdapter`, `KeyEvent`, `keyPressed`, `keyReleased`, `keyTyped` 
-Dove: Game 
-Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
-Snippet: 
+#### Dove: Game 
+#### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
+#### Snippet: 
 ```java 
 public class Game extends Canvas { 
     // ... altre variabili e metodi 
@@ -469,9 +469,9 @@ Utilizzando una classe interna che estende `KeyAdapter`, il gioco gestisce in mo
 
 ### Uso di Timer per il fuoco del boss 
 In questo caso: `Timer`, `TimerTask`, `scheduleAtFixedRate` 
-Dove:  BossEntity 
-Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/BossEntity.java 
-Snippet: 
+#### Dove:  BossEntity 
+#### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/BossEntity.java 
+#### Snippet: 
  ```java 
 private Timer shotTimer; 
     public BossEntity(Game game, String sprite, int x, int y) { 
@@ -490,9 +490,9 @@ Utilizza la classe `Timer` per pianificare e ripetere il fuoco del boss ad inter
 
 
 ### Gestione delle collisioni efficiente 
-Dove: in Entity e sue relative estensioni ma gestite in Game 
-Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
-Snippet: 
+#### Dove: in Entity e sue relative estensioni ma gestite in Game 
+#### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/Game.java 
+#### Snippet: 
 ```java 
     // Brute force collisions 
     for (int p = 0; p < entities.size(); p++) { 
