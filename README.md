@@ -517,4 +517,78 @@ Utilizza la classe `Timer` per pianificare e ripetere il fuoco del boss ad inter
 ``` 
 Utilizza un approccio "brute force" per gestire le collisioni tra tutte le entità nel gioco. Questo metodo può risultare inefficiente con un numero elevato di entità, ma è semplice da implementare e funziona bene per giochi con un numero limitato di elementi. Inoltre, gestisce specificamente le collisioni tra i proiettili del boss e le altre entità. 
 
+### Michela
+### Custom painting con paintComponent()
+#### Dove: MenuPage
+#### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/MenuPage.java
+#### Snippet:
+```java
+@Override 
+
+        protected void paintComponent(Graphics g){ 
+
+            // Calls the paintComponent method of the superclass, which ensures that any default painting behavior provided by the superclass is executed 
+
+            super.paintComponent(g);  
+
+            // Check if a background image is available 
+
+            if (backgroundImage != null){ 
+
+                // Draw the background image onto the panel 
+
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);  
+
+            } 
+
+        } 
+
+```
+paintComponent() è un metodo fornito dalla classe JComponent di Swing, che è una superclasse di vari componenti Swing come JPanel, JButton, ecc. Viene chiamato automaticamente dal framework Swing ogni volta che un componente deve essere dipinto o ridipinto sullo schermo.
+Nella classe MenuPage, il metodo paintComponent() è sovrascritto all'interno di una classe interna anonima definita nell'istanziazione di backgroundPanel. Questo metodo è fondamentale per personalizzare il comportamento del pannello di sfondo (backgroundPanel). Quando viene invocato, riceve come parametro un oggetto Graphics (g), che rappresenta il contesto grafico per la pittura. La prima azione all'interno del metodo è l'invocazione di super.paintComponent(g), assicurando che qualsiasi comportamento di pittura predefinito fornito dalla superclasse venga eseguito per primo. Successivamente, viene eseguito un controllo condizionale per verificare la disponibilità dell'immagine di sfondo (backgroundImage). Se l'immagine esiste, viene disegnata nel contesto grafico del pannello con il metodo drawImage(). Questo processo garantisce che l'immagine di sfondo, se presente, contribuisca all'aspetto visivo dell'interfaccia del menu, migliorando l'esperienza complessiva dell'utente. 
+
+### Gestione delle collisioni tra navicella, entità aliena e sparo 
+#### Dove: ShipEntity
+#### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/ShipEntity.java 
+#### Snippet:
+```java
+public void collidedWith(Entity other) { 
+
+        // if it is an alien, notify the game that the player is dead 
+
+        if (other instanceof AlienEntity || other instanceof ShotEntity) { 
+
+            game.notifyDeath(); // the relevant notification window is displayed 
+
+        } 
+
+    } 
+```
+Il metodo collidedWith() della classe ShipEntity è fondamentale per gestire gli eventi di collisione che coinvolgono la navicella del giocatore. Accetta come parametro un oggetto Entity, che rappresenta l'entità con cui la nave si è scontrata. Utilizzando una logica condizionale, il metodo determina se l'entità che si è scontrata è un alieno (AlienEntity) o uno sparo (ShotEntity). Se l'entità che ha subito la collisione appartiene a uno di questi tipi, una notifica di sconfitta verrà visualizzata all’interno della finestra di gioco, poiché significa che l’utente ha perso la partita.  La complessità deriva dalla gestione degli eventi di collisione in un ambiente di gioco, compresa l'identificazione dei tipi di entità in collisione e l'orchestrazione dei corrispondenti cambiamenti di stato del gioco. 
+
+### Componenti della GUI nel backgroundPanel
+#### Dove: MenuPage
+#### Permalink: https://github.com/michelaminichini/SpaceInvaders-2.0/blob/main/app/src/main/java/org/example/MenuPage.java
+#### Snippet:
+```java
+GridBagConstraints gbc = new GridBagConstraints(); 
+
+gbc.gridx = 0; 
+
+gbc.gridy = 1; 
+
+gbc.insets = new Insets(80, 0, 0, 0); 
+
+gbc.anchor = GridBagConstraints.PAGE_END; 
+
+backgroundPanel.setLayout(new GridBagLayout()); 
+
+backgroundPanel.add(buttonPanel, gbc); 
+```
+Dimostra l'uso di GridBagLayout e GridBagConstraints per gestire la disposizione dei componenti della GUI all'interno del backgroundPanel nella classe MenuPage. 
+
+GridBagLayout è un gestore di layout flessibile e potente, che consente di disporre i componenti in modo simile a una griglia, con dimensioni e allineamenti diversi. In questo caso, l'oggetto GridBagConstraints viene utilizzato per specificare i vincoli per il posizionamento del buttonPanel all'interno del backgroundPanel. Impostando proprietà come la posizione della griglia, gli insets e l'ancoraggio (anchor), si ottiene un controllo preciso sul layout, assicurando che il pannello sia posizionata correttamente all'interno dell'interfaccia.  
+
+Questo metodo è fondamentale per creare interfacce utente funzionali, soprattutto in applicazioni complesse come i giochi, dove la disposizione dei componenti deve essere dinamica e adattabile a diverse dimensioni e risoluzioni dello schermo. La complessità deriva dalla specifica dettagliata dei vincoli di layout e dalla necessità di capire come questi influenzino il posizionamento e il dimensionamento dei componenti all'interno del layout. 
+
  
