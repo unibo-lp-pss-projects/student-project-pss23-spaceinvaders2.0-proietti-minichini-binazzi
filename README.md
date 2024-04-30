@@ -663,7 +663,7 @@ Tuttavia, sono stati implementati diversi elementi innovativi non presenti nella
 
 
 ### Autovalutazione e lavori futuri
-#### Martina
+### Martina
 Il mio ruolo principale all'interno del gruppo è stato quello di gestire la logica del gioco come, per esempio, il movimento dell'orda aliena, lo sparo della navicella del giocatore con il suo relativo movimento e l'entità del boss finale. Nonostante abbia riscontrato diverse problematiche nell'implementazione, le quali andrò ad illustrare successivamente, sono riuscita comunque a ottenere l'obiettivo che mi ero proposta di raggiungere. 
 
 Per quanto riguarda l'orda aliena, il mio primo pensiero è stato quello di voler modernizzare la relativa logica di gioco aggiungendo il movimento della flotta, in quanto, inizialmente, come dimostrato dai numerosi video che ho personalmente esaminato riguardo l'originale Space Invaders, era limitata allo sparo contro il giocatore. Ho, quindi, implementato le varie funzioni, le quali mi hanno permesso di ottenere il movimento desiderato, ponendo maggior attenzione al "cambio di rotta" dovuto alla collisione con i bordi laterali della schermata di gioco.  
