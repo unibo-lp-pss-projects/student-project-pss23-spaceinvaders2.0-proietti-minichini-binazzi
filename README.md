@@ -672,4 +672,21 @@ Lo scoglio principale, però, non è stata l'implementazione del precedente aspe
 
 Una volta risolte le problematiche precedentemente esposte, ho dovuto far fronte ad un'altra complessa logica di gioco: associare il tocco di un tasto della tastiera ad un'azione della navicella del giocatore. Per prima cosa, ho creato le tre variabili che consentono il movimento destra/sinistra e lo sparo del giocatore, poi ho individuato lo strumento per effettuare l'associazione. In questo caso, mi è venuta in aiuto la libreria java "KeyEvent", che mi ha permesso di ottenere l'obiettivo desiderato, separando in due metodi distinti la gestione del momento di pressione del tasto e quello di rilascio in modo da controllarli in maniera indipendente.   
 
-Per concludere posso affermare che, grazie alla mia dedizione, sono riuscita ad ottenere un buon lavoro sebbene io riconosca la necessità di effettuare qualche miglioramento, in quanto non ho mai avuto l'opportunità di interagire con lo sviluppo di videogiochi, anche se di natura semplice come quello che ho realizzato. 
+Per concludere posso affermare che, grazie alla mia dedizione, sono riuscita ad ottenere un buon lavoro sebbene io riconosca la necessità di effettuare qualche miglioramento, in quanto non ho mai avuto l'opportunità di interagire con lo sviluppo di videogiochi, anche se di natura semplice come quello che ho realizzato.
+
+### Michela
+Mi sono occupata principalmente dello sviluppo della schermata del menù iniziale e della realizzazione delle entità Ship e Shot. Considero il mio lavoro valido ed accurato, dato che ci ho impiegato costanza e dedizione.  
+
+Inizialmente, non avendo mai lavorato alla realizzazione di un videogioco in Java, ho avuto diverse difficoltà, specialmente per quanto riguarda lo sviluppo della parte grafica legata al menù iniziale. Usufruendo di documentazioni e risorse online, sono poi riuscita a trovare i giusti mezzi per poter realizzare il lavoro, ottenendo ottimi risultati.  
+
+Per quanto riguarda la creazione del menù, sono partita da un’idea molto semplice ma efficace; la necessità di un’introduzione al gioco, come una presentazione. Ho proseguito implementando i vari bottoni, ciascuno con la propria funzionalità, posizionandoli poi in posizioni ben precise. Per la parte più grafica, ho realizzato l’immagine utilizzata come sfondo in modo da richiamare lo stile retrò del gioco originale, aggiungendo poi una musica di sottofondo.  
+
+In generale, il MenuPage combina l'impostazione dei componenti dell'interfaccia utente, la gestione degli eventi e l'inizializzazione del gioco in un'unica classe, il che può portare a una mancanza di separazione delle varie parti. Dunque, per migliorare il mantenimento del codice, si potrebbe provvedere a sistemare questo aspetto.
+
+Nel creare l’entità Ship, sono stata in grado di regolarne il movimento in modo corretto ed efficace, controllando che l’elemento non esca dai bordi dello schermo. Riguardo al metodo responsabile di notificare quando la navicella si scontra con un’altra entità, il quale fu implementato in maniera adeguata, evitare di comprendere al suo interno il richiamo alla notifica di “morte” (quando il giocatore perde la partita) potrebbe essere un miglioramento notevole, in modo da rendere il codice più chiaro. In futuro, come possibili features aggiuntive, si potrebbe pensare di aggiungere la possibilità per il giocatore di avere a disposizione più vite, in modo da poter rigiocare una volta colpito da un alieno o dal boss. Inoltre, come sviluppo più complesso, si potrebbe implementare un pulsante all’interno del menù che permetta all’utente di scegliere tre diverse modalità di gioco, ad esempio “facile”,” medio/normale”, “difficile”.   
+
+Infine, l’entità Shot, similmente alla classe precedente, eredita proprietà e metodi dalla classe Entity in maniera efficace, facilitando il riutilizzo del codice e mantenendo la coerenza tra i vari tipi di entità. Anche qui, i metodi principali sono stati realizzati correttamente, nonostante l’uso di magic numbers, che possono essere sostituiti con una variabile per migliorare la leggibilità e la manutenibilità del codice.  
+
+Per tutti i componenti a cui mi sono dedicata, ho provveduto a riportare una documentazione esaustiva e completa, in modo da migliorare la comprensione del codice.   
+
+In generale, sono abbastanza soddisfatta dei risultati ottenuti, soprattutto perchè il menù di gioco è risultato essere esattamente come me lo immaginavo. 
