@@ -690,3 +690,16 @@ Infine, l’entità Shot, similmente alla classe precedente, eredita proprietà 
 Per tutti i componenti a cui mi sono dedicata, ho provveduto a riportare una documentazione esaustiva e completa, in modo da migliorare la comprensione del codice.   
 
 In generale, sono abbastanza soddisfatta dei risultati ottenuti, soprattutto perchè il menù di gioco è risultato essere esattamente come me lo immaginavo. 
+
+### Angelica (studente-lavoratore)
+Mi sono occupata principalmente della parte audiovisiva del gioco e della realizzazione dell’estetica dell’alieno per rendere l’esperienza utente accattivante e retrò allo stesso tempo. Ritengo il mio lavoro discretamente buono, anche se avrei potuto cercare di collaborare di più con le mie colleghe. 
+
+Nel processo di sviluppo dell'entità aliena, sono riuscita a gestire con successo un punto cruciale riscontrato durante l’implementazione: l’immagine, una volta raggiunto il bordo della finestra di gioco, non veniva rappresentata per intero, risultando quindi come “tagliata”, nonostante non fosse stato riscontrato alcun contrasto tra la dimensione della finestra e quella dell’alieno. Sono riuscita a risolvere l’errore selezionando accuratamente un’immagine adatta alle esigenze del movimento dell’entità, e implementando in maniera corretta la classe Sprite che spiegherò qui di seguito.  
+
+Ogni componente del gioco è rappresentato da un’immagine, ovvero una sprite. Utilizzarla consente di usufruire di una singola immagine in diversi punti senza dover memorizzare più copie della stessa. Grazie al metodo ‘public void draw(Graphics g, int x, int y)’, si riesce a disegnare la sprite sul contesto grafico fornito alle coordinate (x, y) specificate. In seguito, utilizzando il metodo drawImage della classe Graphics, ho potuto disegnare l'immagine della sprite sullo schermo.  
+
+Lo step successivo è stato quello di definire la classe SpriteStore, che funge da gestore delle risorse per le sprite nel gioco. Le funzionalità a cui mi sono dedicata con maggior attenzione sono il metodo getSprite(String ref) e `fail(String message). Il primo metodo si occupa di caricare e restituire una sprite dato un riferimento all'immagine e, se è già presente nella cache, viene restituita direttamente anziché ricaricarla. Il secondo metodo specificato implementa una procedura di utilità per gestire il fallimento del caricamento delle risorse, stampando un messaggio di errore e terminando il gioco.  
+
+La definizione e gestione di AudioClip e AudioStore mi è risultata abbastanza semplice, in quanto sono riuscita ad affrontare l’implementazione di entrambe seguendo la medesima metodologia usata per Sprite e SpriteStore. 
+
+Nonostante la scarsa conoscenza pregressa del linguaggio Java, grazie all’aiuto delle documentazioni, del materiale didattico messo a disposizione e soprattutto del sostegno delle mie compagne, posso dire che sono generalmente soddisfatta del lavoro eseguito e del raggiungimento degli obiettivi prestabiliti.
