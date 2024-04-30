@@ -21,45 +21,59 @@ public class MenuPage extends JFrame {
     public AudioClip menuMusic;
     
     public MenuPage() {
+        /*
+         * Create the Menu frame
+         */
         setTitle("Menu Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
 
-        // set a background image and sound
+        /*
+         * Set a background image and music (sound)
+         */
         JPanel backgroundPanel = new JPanel(){
             private Image backgroundImage;
             {
             try{
-                backgroundImage = ImageIO.read(getClass().getResourceAsStream("/sprites/bgimage.png")); // loads the image and sound to set as a background
-                menuMusic = audioStore.getAudio("sound/menuMusic.wav");
-                menuMusic.loop();
+                backgroundImage = ImageIO.read(getClass().getResourceAsStream("/sprites/bgimage.png")); // loads the image
+                menuMusic = audioStore.getAudio("sound/menuMusic.wav"); // loads the audio 
+                menuMusic.loop(); // the music continues until the frame is closed
             } catch (Exception e){
                 e.printStackTrace();
             }
         }
+        /*
+         * Customize the painting behavior of the background panel by drawing a background image, if available.
+         * It takes a Graphics object g as a parameter, which represents the graphics context for painting.
+         */
         @Override
-        protected void paintComponent(Graphics g){ // is responsible for painting the component on the screen. It takes a Graphics object g as a parameter, which represents the graphics context for painting.
-            super.paintComponent(g); //this calls the paintComponent method of the superclass, which ensures that any default painting behavior provided by the superclass is executed
-            if (backgroundImage != null){ // this condition checks if there's a non-null backgroundImage object available
+        protected void paintComponent(Graphics g){
+            // Calls the paintComponent method of the superclass, which ensures that any default painting behavior provided by the superclass is executed
+            super.paintComponent(g); 
+            // Check if a background image is available
+            if (backgroundImage != null){
+                // Draw the background image onto the panel
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); 
-                // if a background image is available, this line draws the image onto the component's graphics context (g). 
-                // it draws the image starting from coordinates (0, 0) and scales it to fit the size of the component, which is determined by getWidth() and getHeight().
             }
         }
                 
         };
+
         backgroundPanel.setLayout(new BorderLayout());
-        backgroundPanel.setPreferredSize(new Dimension(800,600)); // set the same size of the JFrame
+        backgroundPanel.setPreferredSize(new Dimension(800,600));
 
-
-        // create a panel containing the buttons
+        /*
+         * Create the three buttons contained in the menu.
+         * First, the button panel is created.
+         */
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setPreferredSize(new Dimension(300, 200));
 
-
-
+        /*
+         * Create a new label that displays the game commands for the player
+         */
         contentLabel = new JLabel("<html><body>Press space bar to shoot and arrows to move</body></html>");
         contentLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         contentLabel.setVisible(false); // initially is not visible
@@ -140,25 +154,38 @@ public class MenuPage extends JFrame {
 
         buttonPanel.add(Box.createVerticalGlue()); // adds a vertical glue component to the buttonPanel. Vertical glue will cause the components to be spaced out vertically, pushing them to the top and bottom edges of the container.
         buttonPanel.add(commands);
-        buttonPanel.add(Box.createVerticalStrut(10)); // it creates an invisible component that acts as a spacer with a specified height (here is set to 10).
+
+        // Create an invisible component that acts as a spacer with a specified height
+        buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(exit);
         buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(start);
         buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(contentLabel);
 
-        buttonPanel.setOpaque(false); // make the panel transparent, allowing the background image to be visible.  
+        // Make the panel transparent, allowing the background image to be visible.  
+        buttonPanel.setOpaque(false); 
 
-        // set a maximum value of height of the buttons
+        // Set a maximum value of height of the buttons
         commands.setMaximumSize(new Dimension(Integer.MAX_VALUE,10));
         exit.setMaximumSize(new Dimension(Integer.MAX_VALUE,10));
         start.setMaximumSize(new Dimension(Integer.MAX_VALUE,10));
 
+        /*
+         * Create a new instance of GridBagConstraints. This object is used to specify constraints for how components are placed within a GridBagLayout.
+         */
         GridBagConstraints gbc = new GridBagConstraints();
+        /*
+         * The gridx and gridy properties determine the row and column indices where the component will be placed within the grid. 
+         * Here, "gridx" is set to 0, indicating the first column, and "gridy" is set to 1, indicating the second row (bottom row).
+         */
         gbc.gridx = 0;
-        gbc.gridy = 1; // set the grid position to row 1 (bottom row)
+        gbc.gridy = 1;
+        // The insets property specifies the external padding (top, left, bottom, right) around the component.
         gbc.insets = new Insets(80, 0, 0, 0); 
+        // The anchor property specifies where the component should be positioned within its display area if it doesn't fill the entire space allocated to it. In this case, the component is allocated to the bottom of its display area.
         gbc.anchor = GridBagConstraints.PAGE_END;
+        // The buttonPanel is added to the backgroundPanel using the specified GridBagConstraints
         backgroundPanel.setLayout(new GridBagLayout());
         backgroundPanel.add(buttonPanel, gbc);
 
