@@ -660,3 +660,55 @@ Altri elementi come le barriere che consentono al giocatore di proteggersi dagli
 I casi citati in precedenza corrispondono a possibili fattori da inserire in futuro all’interno di Space Invaders. Insieme ad essi, si potrebbe includere l’aggiunta di una “barra della vita” che funge contatore dei punti vita del boss in modo da far capire al giocatore quante volte bisogna colpirlo per eliminarlo. Inoltre, si potrebbero implementare tre diverse modalità di gioco: facile, medio, difficile. Ciascuna corrisponde ad una versione del gioco leggermente diversa. Ad esempio, selezionando la terza opzione, gli alieni potrebbero essere in grado di muoversi verso il giocatore molto più velocemente rispetto alla prima modalità, oppure avrebbero l’abilità di sparare come le altre entità.  
 
 Tuttavia, sono stati implementati diversi elementi innovativi non presenti nella versione originale del gioco. Tra questi notiamo: l’introduzione dell’entità boss al terminare dell’orda di alieni presente, la sua abilità di sparare proiettili contro il giocatore e la presenza di due finestre che fungono da notifica per l’utente in caso di vincita o perdita.
+
+
+### Autovalutazione e lavori futuri
+### Martina
+Il mio ruolo principale all'interno del gruppo è stato quello di gestire la logica del gioco come, per esempio, il movimento dell'orda aliena, lo sparo della navicella del giocatore con il suo relativo movimento e l'entità del boss finale. Nonostante abbia riscontrato diverse problematiche nell'implementazione, le quali andrò ad illustrare successivamente, sono riuscita comunque a ottenere l'obiettivo che mi ero proposta di raggiungere. 
+
+Per quanto riguarda l'orda aliena, il mio primo pensiero è stato quello di voler modernizzare la relativa logica di gioco aggiungendo il movimento della flotta, in quanto, inizialmente, come dimostrato dai numerosi video che ho personalmente esaminato riguardo l'originale Space Invaders, era limitata allo sparo contro il giocatore. Ho, quindi, implementato le varie funzioni, le quali mi hanno permesso di ottenere il movimento desiderato, ponendo maggior attenzione al "cambio di rotta" dovuto alla collisione con i bordi laterali della schermata di gioco.  
+
+Lo scoglio principale, però, non è stata l'implementazione del precedente aspetto di gioco, ma quella relativa all'entità del boss. Nonostante non fosse una caratteristica esistente nella prima versione del videogame, ho comunque voluto provare a realizzarla, per rendere più immersiva l'esperienza del giocatore. In primo luogo, ho creato l'entità del boss riutilizzando il codice implementato per gli altri nemici in modo semplice e corretto, aggiungendo, inoltre, la possibilità di colpire il giocatore attraverso un loop di spari. Durante la realizzazione, sono riuscita a mantenere un codice facilmente comprensibile, permettendo, al tempo stesso, la possibilità di implementare successive feature di gioco come: la barra della vita, la gestione dei colpi, così che si possa eliminare la meccanica degli attacchi in loop, introducendo invece condizioni specifiche (es. il boss può sparare colpi solo se il giocatore si trova in una determinata area sottostante) e l'evocazione di ulteriori alieni nemici, nel caso in cui la vita del boss sia scesa sotto un certo limite. 
+
+Una volta risolte le problematiche precedentemente esposte, ho dovuto far fronte ad un'altra complessa logica di gioco: associare il tocco di un tasto della tastiera ad un'azione della navicella del giocatore. Per prima cosa, ho creato le tre variabili che consentono il movimento destra/sinistra e lo sparo del giocatore, poi ho individuato lo strumento per effettuare l'associazione. In questo caso, mi è venuta in aiuto la libreria java "KeyEvent", che mi ha permesso di ottenere l'obiettivo desiderato, separando in due metodi distinti la gestione del momento di pressione del tasto e quello di rilascio in modo da controllarli in maniera indipendente.   
+
+Per concludere posso affermare che, grazie alla mia dedizione, sono riuscita ad ottenere un buon lavoro sebbene io riconosca la necessità di effettuare qualche miglioramento, in quanto non ho mai avuto l'opportunità di interagire con lo sviluppo di videogiochi, anche se di natura semplice come quello che ho realizzato.
+
+### Michela
+Mi sono occupata principalmente dello sviluppo della schermata del menù iniziale e della realizzazione delle entità Ship e Shot. Considero il mio lavoro valido ed accurato, dato che ci ho impiegato costanza e dedizione.  
+
+Inizialmente, non avendo mai lavorato alla realizzazione di un videogioco in Java, ho avuto diverse difficoltà, specialmente per quanto riguarda lo sviluppo della parte grafica legata al menù iniziale. Usufruendo di documentazioni e risorse online, sono poi riuscita a trovare i giusti mezzi per poter realizzare il lavoro, ottenendo ottimi risultati.  
+
+Per quanto riguarda la creazione del menù, sono partita da un’idea molto semplice ma efficace; la necessità di un’introduzione al gioco, come una presentazione. Ho proseguito implementando i vari bottoni, ciascuno con la propria funzionalità, posizionandoli poi in posizioni ben precise. Per la parte più grafica, ho realizzato l’immagine utilizzata come sfondo in modo da richiamare lo stile retrò del gioco originale, aggiungendo poi una musica di sottofondo.  
+
+In generale, il MenuPage combina l'impostazione dei componenti dell'interfaccia utente, la gestione degli eventi e l'inizializzazione del gioco in un'unica classe, il che può portare a una mancanza di separazione delle varie parti. Dunque, per migliorare il mantenimento del codice, si potrebbe provvedere a sistemare questo aspetto.
+
+Nel creare l’entità Ship, sono stata in grado di regolarne il movimento in modo corretto ed efficace, controllando che l’elemento non esca dai bordi dello schermo. Riguardo al metodo responsabile di notificare quando la navicella si scontra con un’altra entità, il quale fu implementato in maniera adeguata, evitare di comprendere al suo interno il richiamo alla notifica di “morte” (quando il giocatore perde la partita) potrebbe essere un miglioramento notevole, in modo da rendere il codice più chiaro. In futuro, come possibili features aggiuntive, si potrebbe pensare di aggiungere la possibilità per il giocatore di avere a disposizione più vite, in modo da poter rigiocare una volta colpito da un alieno o dal boss. Inoltre, come sviluppo più complesso, si potrebbe implementare un pulsante all’interno del menù che permetta all’utente di scegliere tre diverse modalità di gioco, ad esempio “facile”,” medio/normale”, “difficile”.   
+
+Infine, l’entità Shot, similmente alla classe precedente, eredita proprietà e metodi dalla classe Entity in maniera efficace, facilitando il riutilizzo del codice e mantenendo la coerenza tra i vari tipi di entità. Anche qui, i metodi principali sono stati realizzati correttamente, nonostante l’uso di magic numbers, che possono essere sostituiti con una variabile per migliorare la leggibilità e la manutenibilità del codice.  
+
+Per tutti i componenti a cui mi sono dedicata, ho provveduto a riportare una documentazione esaustiva e completa, in modo da migliorare la comprensione del codice.   
+
+In generale, sono abbastanza soddisfatta dei risultati ottenuti, soprattutto perchè il menù di gioco è risultato essere esattamente come me lo immaginavo. 
+
+### Angelica (studente-lavoratore)
+Mi sono occupata principalmente della parte audiovisiva del gioco e della realizzazione dell’estetica dell’alieno per rendere l’esperienza utente accattivante e retrò allo stesso tempo. Ritengo il mio lavoro discretamente buono, anche se avrei potuto cercare di collaborare di più con le mie colleghe. 
+
+Nel processo di sviluppo dell'entità aliena, sono riuscita a gestire con successo un punto cruciale riscontrato durante l’implementazione: l’immagine, una volta raggiunto il bordo della finestra di gioco, non veniva rappresentata per intero, risultando quindi come “tagliata”, nonostante non fosse stato riscontrato alcun contrasto tra la dimensione della finestra e quella dell’alieno. Sono riuscita a risolvere l’errore selezionando accuratamente un’immagine adatta alle esigenze del movimento dell’entità, e implementando in maniera corretta la classe Sprite che spiegherò qui di seguito.  
+
+Ogni componente del gioco è rappresentato da un’immagine, ovvero una sprite. Utilizzarla consente di usufruire di una singola immagine in diversi punti senza dover memorizzare più copie della stessa. Grazie al metodo ‘public void draw(Graphics g, int x, int y)’, si riesce a disegnare la sprite sul contesto grafico fornito alle coordinate (x, y) specificate. In seguito, utilizzando il metodo drawImage della classe Graphics, ho potuto disegnare l'immagine della sprite sullo schermo.  
+
+Lo step successivo è stato quello di definire la classe SpriteStore, che funge da gestore delle risorse per le sprite nel gioco. Le funzionalità a cui mi sono dedicata con maggior attenzione sono il metodo getSprite(String ref) e `fail(String message). Il primo metodo si occupa di caricare e restituire una sprite dato un riferimento all'immagine e, se è già presente nella cache, viene restituita direttamente anziché ricaricarla. Il secondo metodo specificato implementa una procedura di utilità per gestire il fallimento del caricamento delle risorse, stampando un messaggio di errore e terminando il gioco.  
+
+La definizione e gestione di AudioClip e AudioStore mi è risultata abbastanza semplice, in quanto sono riuscita ad affrontare l’implementazione di entrambe seguendo la medesima metodologia usata per Sprite e SpriteStore. 
+
+Nonostante la scarsa conoscenza pregressa del linguaggio Java, grazie all’aiuto delle documentazioni, del materiale didattico messo a disposizione e soprattutto del sostegno delle mie compagne, posso dire che sono generalmente soddisfatta del lavoro eseguito e del raggiungimento degli obiettivi prestabiliti.
+
+
+## Guida utente 
+Per poter giocare a Space Invaders è necessario utilizzare pochi tasti: 
+- Barra spaziatrice per sparare 
+- Freccette (destra e sinistra) per muovere la navicella a destra o a sinistra 
+
+I comandi di gioco sono stati inseriti all’interno del menù iniziale sotto l’opzione “commands”, in modo da poter leggere e ricordare le istruzioni poco prima di avviare il gioco. 
+Per poter vincere, è necessario colpire prima di tutto ogni alieno presente nello schermo, poi il boss che apparirà subito dopo. Al contrario, se il giocatore viene colpito dagli alieni, poiché non in grado di eliminarli tutti in tempo, o dallo sparo del boss, viene considerato “game over”. 
