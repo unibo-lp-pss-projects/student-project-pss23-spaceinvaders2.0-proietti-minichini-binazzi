@@ -50,7 +50,7 @@ public class ShotEntity extends Entity { // ShotEntity inherits all the properti
      * This method handles collision events between the shot and other entities. 
      * It ensures that only one collision event is processed for each shot and proceeds to remove the entities 
      * and to notify the game when the shot collides with an alien.
-     * The param "other" represents the other entity with which the shot has collided
+     * The param "other" represents the other entity with which the shot has collided.
      */
     public void collidedWith(Entity other) {
         // prevent double kills checking the "used" flag. If the shot already hit something, do not collide. 

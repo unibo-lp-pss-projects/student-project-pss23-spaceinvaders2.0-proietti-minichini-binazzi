@@ -35,8 +35,6 @@ public class AudioStore {
      * If it is, it returns it immediately. 
      * If not, it retrieves the audio file from a specified resource, loads it into memory as a Clip object and creates a new AudioClip instance with this Clip.
      * Then, it stores the audio file in the audioClips collection for future use, and returns it. 
-     * 
-     * To sum up, it serves as a method to efficiently fetch and manage audio clips, either from memory or by loading them from external resources when needed.
      */
     public AudioClip getAudio(String ref) {
         if (audioClips.containsKey(ref)) {
