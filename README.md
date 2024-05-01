@@ -703,3 +703,11 @@ Lo step successivo è stato quello di definire la classe SpriteStore, che funge 
 La definizione e gestione di AudioClip e AudioStore mi è risultata abbastanza semplice, in quanto sono riuscita ad affrontare l’implementazione di entrambe seguendo la medesima metodologia usata per Sprite e SpriteStore. 
 
 Nonostante la scarsa conoscenza pregressa del linguaggio Java, grazie all’aiuto delle documentazioni, del materiale didattico messo a disposizione e soprattutto del sostegno delle mie compagne, posso dire che sono generalmente soddisfatta del lavoro eseguito e del raggiungimento degli obiettivi prestabiliti.
+
+
+## Guida utente 
+Per poter giocare a Space Invaders è necessario utilizzare pochi tasti: 
+- Barra spaziatrice per sparare 
+- Freccette (destra e sinistra) per muovere la navicella a destra o a sinistra 
+I comandi di gioco sono stati inseriti all’interno del menù iniziale sotto l’opzione “commands”, in modo da poter leggere e ricordare le istruzioni poco prima di avviare il gioco. 
+Per poter vincere, è necessario colpire prima di tutto ogni alieno presente nello schermo, poi il boss che apparirà subito dopo. Al contrario, se il giocatore viene colpito dagli alieni, poiché non in grado di eliminarli tutti in tempo, o dallo sparo del boss, viene considerato “game over”. 
