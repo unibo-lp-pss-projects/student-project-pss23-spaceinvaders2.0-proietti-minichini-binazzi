@@ -712,3 +712,8 @@ Per poter giocare a Space Invaders è necessario utilizzare pochi tasti:
 
 I comandi di gioco sono stati inseriti all’interno del menù iniziale sotto l’opzione “commands”, in modo da poter leggere e ricordare le istruzioni poco prima di avviare il gioco. 
 Per poter vincere, è necessario colpire prima di tutto ogni alieno presente nello schermo, poi il boss che apparirà subito dopo. Al contrario, se il giocatore viene colpito dagli alieni, poiché non in grado di eliminarli tutti in tempo, o dallo sparo del boss, viene considerato “game over”. 
+
+Per avviare il videogioco attraverso il FatJar, seguire i seguenti passaggi:
+1. clonare il repository del progetto sul proprio IDE
+2. eseguire il seguente comando "gradle shadowJar" sulla root "rootLocalizzazioneDelClone/SpaceInvaders-2.0" che permetterà la creazione del file FatJar
+3. l'eseguibile sarà disponibile nella cartella app/build/libs e, seguendo il medesimo percorso sull'esplora file, con un doppio click lanciare il file app-all.jar
