@@ -1,17 +1,17 @@
 package org.example;
 
+/*
+ * This is the main part of the game. This class will serve as the game logic's central mediator in addition to managing the display.
+ * Display management will consist of a loop that cycles round each entity asking them to move and then drawing them in the right place.
+ * With the assistance of an inner class, it will also allow the player to control the ship.
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.List;
-
-/*
- * The main part of the game. This class will serve as the game logic's central mediator in addition to managing the display.
- * Display management will consist of a loop that cycles round each entity asking them to move and then drawing them in the right place.
- * With the assistance of an inner class it will also allow the player to control the ship.
- */
 
 public class Game extends Canvas {
     public BufferStrategy strategy;  // The strategy that enables the use of rapid page flipping
@@ -23,7 +23,7 @@ public class Game extends Canvas {
     public Entity ship;  // The entity representing the player (the ship)
     public double moveSpeed = 300;
 
-    public long lastFire = 0;  // The last time a shot was fired
+    public long lastFire = 0;
     public long firingInterval = 50;
 
     public int alienCount;
@@ -139,7 +139,6 @@ public class Game extends Canvas {
 
     public void startGame() {
 
-        // clear out any existing entities and initialise a new set
         entities.clear();
         initEntities();
 
@@ -270,13 +269,11 @@ public class Game extends Canvas {
 
     /*
      * The main game loop. This loop is running during all game play as it is responsible for the following activities:
-     * <p/>
      * - Working out the speed of the game loop to update moves
      * - Moving the game entities
      * - Drawing the screen contents (entities, text)
      * - Updating game events
      * - Checking Input
-     * <p/>
      */
     public void gameLoop() {
         long lastLoopTime = System.currentTimeMillis();
@@ -332,9 +329,7 @@ public class Game extends Canvas {
             entities.removeAll(removeList);
             removeList.clear();
 
-            // if a game event has indicated that game logic should be
-            // resolved, cycle round every entity requesting that their
-            // personal logic should be considered.
+            // if a game event has indicated that game logic should be resolved, cycle round every entity requesting that their personal logic should be considered.
             if (logicRequiredThisLoop) {
                 for (Entity entity : entities) {
                     entity.doLogic();
@@ -343,7 +338,7 @@ public class Game extends Canvas {
                 logicRequiredThisLoop = false;
             }
 
-            // if we're waiting for an "any key" press then draw the current message
+            // if we are waiting for an "any key" press then draw the current message
             if (waitingForKeyPress) {
                 g.setColor(Color.white);
                 g.drawString(message,
@@ -351,14 +346,12 @@ public class Game extends Canvas {
                     250);
             }
 
-            // finally, we've completed drawing so clear up the graphics and
-            // flip the buffer over
+            // finally, we have completed drawing so clear up the graphics and flip the buffer over
             g.dispose();
             strategy.show();
 
-            // resolve the movement of the ship. First assume the ship isn't
-            // moving. If either cursor key is pressed then update the
-            // movement appropriately
+            // resolve the movement of the ship. 
+            // First assume the ship is not moving. If either cursor key is pressed then update the movement appropriately
             ship.setHorizontalMovement(0);
 
             if ((leftPressed) && (!rightPressed)) {
@@ -367,7 +360,7 @@ public class Game extends Canvas {
                 ship.setHorizontalMovement(moveSpeed);
             }
 
-            // if we're pressing fire, attempt to fire
+            // if we are pressing fire, attempt to fire
             if (firePressed) {
                 tryToFire();
             }
@@ -384,31 +377,24 @@ public class Game extends Canvas {
         }
     }
 
-    /**
+    /*
      * A class to handle keyboard input from the user. The class handles both
      * dynamic input during game play, i.e. left/right and shoot, and more
-     * static type input (i.e. press any key to continue)
-     * <p/>
-     * This has been implemented as an inner class more through habit than
-     * anything else. Its perfectly normal to implement this as separate
-     * class if slight less convenient.
+     * static type input (i.e. press any key to continue).
      */
     public class KeyInputHandler extends KeyAdapter {
-//        /**
-//         * The number of key presses we've had while waiting for an "any key" press
-//         */
+       /*
+        * The number of key presses we have had while waiting for an "any key" press
+        */
         public int pressCount = 1;
-//
-//        /**
-//         * Notification from AWT that a key has been pressed. Note that a key
-//         * being pressed is equal to being pushed down but *NOT*
-//         * released. That's where keyTyped() comes in.
-//         *
-//         * @param e The details of the key that was pressed
-//         */
+
+       /*
+        * Notification from AWT that a key has been pressed. Note that a key
+        * being pressed is equal to being pushed down but not released. That's where keyTyped() comes in.
+        * The parameter e is the details of the key that was pressed.
+        */
         public void keyPressed(KeyEvent e) {
-//            // if we're waiting for an "any key" typed then we don't
-//            // want to do anything with just a "press"
+           // if we are waiting for an "any key" typed then we do not want to do anything with just a "press"
             if (waitingForKeyPress) {
                 return;
             }
@@ -424,15 +410,13 @@ public class Game extends Canvas {
                 laserSound.play();
             }
         }
-//
-//        /**
-//         * Notification from AWT that a key has been released.
-//         *
-//         * @param e The details of the key that was released
-//         */
+
+       /*
+        * Notification from AWT that a key has been released.
+        * The parameter e is the details of the key that was released.
+        */
         public void keyReleased(KeyEvent e) {
-            // if we're waiting for an "any key" typed then we don't
-            // want to do anything with just a "released"
+            // if we're waiting for an "any key" typed then we do not want to do anything with just a "released"
             if (waitingForKeyPress) {
                 return;
             }
@@ -448,22 +432,17 @@ public class Game extends Canvas {
             }
         }
 
-//        /**
-//         * Notification from AWT that a key has been typed. Note that typing
-//         * a key means to both press and then release it.
-//         *
-//         * @param e The details of the key that was typed.
-//         */
+       /*
+        * Notification from AWT that a key has been typed. 
+        * Note that typing a key means to both press and then release it.
+        * The parameter e is the details of the key that was typed.
+        */
         public void keyTyped(KeyEvent e) {
-            // if we're waiting for an "any key" type then check if we've
-            // received any recently. We may have had a keyType() event from
-            // the user releasing the shoot or move keys, hence the use of
-            // the "pressCount" counter.
+            // if we're waiting for an "any key" type then check if we have received any recently. We may have had a keyType() event from
+            // the user releasing the shoot or move keys, hence the use of the "pressCount" counter.
             if (waitingForKeyPress) {
                 if (pressCount == 1) {
-                    // since we've now received our key typed
-                    // event we can mark it as such and start
-                    // our new game
+                    // since we have now received our key typed event we can mark it as such and start our new game
                     waitingForKeyPress = false;
                     startGame();
                     pressCount = 0;
@@ -478,17 +457,12 @@ public class Game extends Canvas {
         }
     }
 
-    /**
-     * The entry point into the game. We'll simply create an instance of class
-     * which will start the display and game loop.
-     *
+    /*
+     * The entry point into the game. 
+     * We will simply create an instance of class which will start the display and game loop.
      */
 
     public static void main(String[] args) {
-
-        // Start the main game loop, note: this method will not return until
-        // the game has finished running. Hence, we are using the actual main
-        // thread to run the game.
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

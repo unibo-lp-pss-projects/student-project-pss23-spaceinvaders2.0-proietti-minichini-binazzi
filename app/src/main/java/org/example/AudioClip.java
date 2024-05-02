@@ -10,12 +10,12 @@ package org.example;
 import javax.sound.sampled.Clip; // The Clip interface represents a unique type of data line whose audio data can be loaded before playback, instead of being streamed in real time.
 
 public class AudioClip {
-    public Clip clip; // A public attribute named clip of type Clip. This attribute will hold the audio clip that this AudioClip object represents.
+    public Clip clip; // A public attribute named clip of type Clip. It will hold the audio clip that this AudioClip object represents.
 
     /*
      * When you create a new AudioClip, you give it an actual audio clip to hold onto.
      */
-    public AudioClip(Clip clip) { // This is a constructor for the AudioClip class. It takes a Clip object as a parameter and assigns it to the clip attribute of the AudioClip object being constructed.
+    public AudioClip(Clip clip) { // This constructor takes a Clip object as a parameter and assigns it to the clip attribute of the AudioClip object.
         this.clip = clip;
     }
 
