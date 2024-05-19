@@ -1,0 +1,19 @@
+name: CI/CD Process
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  success:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.6
+      - name: Configure git
+        run: |
+          git config --global user.name "Danilo Pianini"
+          git config --global user.email "danilo.pianini@unibo.it"
+      - name: Run on existing repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.AUTOMERGE_TOKEN }}
+        run: ./process.main.kts unibo-oop-projects/OOP23-LucaFerar-Soprnzetti-Vdamianob-Velli-wulf
